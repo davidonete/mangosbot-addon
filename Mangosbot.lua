@@ -782,7 +782,7 @@ function CreateGenericCombatToolBar(frame, y, name, group, x, spacing, register)
     return CreateToolBar(frame, -y, name, {
         ["potions"] = {
             icon = "potions",
-            command = {[0] = "co ~potions,?"},
+            command = {[0] = "react ~potions,?"},
             strategy = "potions",
             tooltip = "Use health and mana potions",
             index = 0,
@@ -1679,11 +1679,11 @@ local function fmod(a,b)
 end
 
 function QueryBotParty()
-    wait(0.1, function() SendBotCommand("#a ll ?"..CommandSeparator.."#a formation ?"..CommandSeparator.."#a stance ?"..CommandSeparator.."#a co ?"..CommandSeparator.."#a nc ?"..CommandSeparator.."#a save mana ?", "PARTY") end)
+    wait(0.1, function() SendBotCommand("#a ll ?"..CommandSeparator.."#a formation ?"..CommandSeparator.."#a stance ?"..CommandSeparator.."#a co ?"..CommandSeparator.."#a nc ?"..CommandSeparator.."#a save mana ?"..CommandSeparator.."#a react ?", "PARTY") end)
 end
 
 function QuerySelectedBot(name)
-    wait(0.1, function() SendBotCommand("#a formation ?"..CommandSeparator.."#a stance ?"..CommandSeparator.."#a ll ?"..CommandSeparator.."#a co ?"..CommandSeparator.."#a nc ?"..CommandSeparator.."#a save mana ?"..CommandSeparator.."#a rti ?", "WHISPER", nil, name) end)
+    wait(0.1, function() SendBotCommand("#a formation ?"..CommandSeparator.."#a stance ?"..CommandSeparator.."#a ll ?"..CommandSeparator.."#a co ?"..CommandSeparator.."#a nc ?"..CommandSeparator.."#a save mana ?"..CommandSeparator.."#a rti ?"..CommandSeparator.."#a react ?", "WHISPER", nil, name) end)
 end
 
 Mangosbot_EventFrame:SetScript("OnEvent", function(self)
@@ -2039,6 +2039,12 @@ Mangosbot_EventFrame:SetScript("OnEvent", function(self)
                                 break
                             end
                         end
+						for key,strategy in pairs(bot["strategy"]["react"]) do
+                            if (strategy == button["strategy"]) then
+                                toggle = true
+                                break
+                            end
+                        end
                     end
                     if (button["formation"] ~= nil and bot["formation"] ~= nil and string.find(bot["formation"], button["formation"]) ~= nil) then
                         toggle = true
@@ -2085,6 +2091,12 @@ function UpdateGroupToolBar()
                         end
                     end
                     for key,strategy in pairs(bot["strategy"]["co"]) do
+                        if (strategy == button["strategy"]) then
+                            toggle = true
+                            break
+                        end
+                    end
+					for key,strategy in pairs(bot["strategy"]["react"]) do
                         if (strategy == button["strategy"]) then
                             toggle = true
                             break
@@ -2159,23 +2171,34 @@ function OnWhisper(message, sender)
     if (botTable[sender] == nil) then
         botTable[sender] = {}
     end
-
-    local bot = botTable[sender]
-    if (string.find(message, 'Strategies: ') == 1) then
-        local list = {}
-        local type = "co"
-        local role = "dps"
+	
+    local type = "co"
+	local validStrategy = false
+	local bot = botTable[sender]
+	if(string.find(message, 'Combat Strategies: ') == 1) then
+		type = "co"
+		validStrategy = true
+	elseif(string.find(message, 'Non Combat Strategies: ') == 1) then
+		type = "nc"
+		validStrategy = true
+	elseif(string.find(message, 'Reaction Strategies: ') == 1) then
+		type = "react"
+		validStrategy = true
+	end
+    
+    if (validStrategy) then
+		local list = {}
+		local role = "dps"
         local text = string.sub(message, 13)
         local splitted = splitString2(text, ", ")
         for i = 1, tablelength(splitted) do
             local name = trim2(splitted[i])
             table.insert(list, name)
-            if (name == "nc") then type = 'nc' end
             if (name == "heal") then role = "heal" end
             if (name == "tank" or name == "bear") then role = "tank" end
         end
         if (bot['strategy'] == nil) then
-            bot['strategy'] = {nc = {}, co = {}}
+            bot['strategy'] = {nc = {}, co = {}, react = {}}
         end
         if (type == "co") then
             bot["role"] = role
