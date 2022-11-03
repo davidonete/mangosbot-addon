@@ -1079,6 +1079,13 @@ function CreateSelectedBotPanel()
             strategy = "threat",
             tooltip = "Keep threat level low",
             index = 4
+        },
+		["wait_for_attack"] = {
+            icon = "wait_for_attack",
+            command = {[0] = "co ~wait for attack,?"},
+            strategy = "wait for attack",
+            tooltip = "Wait 5 seconds before attacking",
+            index = 5
         }
     })
 
