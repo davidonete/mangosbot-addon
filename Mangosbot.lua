@@ -1084,8 +1084,15 @@ function CreateSelectedBotPanel()
             icon = "wait_for_attack",
             command = {[0] = "co ~wait for attack,?"},
             strategy = "wait for attack",
-            tooltip = "Wait 5 seconds before attacking",
+            tooltip = "Wait X seconds before attacking. To change the amount of seconds use 'wait for attack time X'",
             index = 5
+        },
+		["pull"] = {
+            icon = "ranged",
+            command = {[0] = "co ~pull,?"},
+            strategy = "pull",
+            tooltip = "Set this bot to pull using the 'pull command'. Recommended to only have one bot with pull enabled.",
+            index = 6
         }
     })
 
@@ -1105,28 +1112,28 @@ function CreateSelectedBotPanel()
     CreateToolBar(frame, -y, "CLASS_DRUID", {
         ["bear"] = {
             icon = "bear",
-            command = {[0] = "co +bear,?"},
+            command = {[0] = "co +bear,+pull,?"},
             strategy = "bear",
             tooltip = "Use bear form",
             index = 0
         },
         ["cat"] = {
             icon = "cat",
-            command = {[0] = "co +cat,?"},
+            command = {[0] = "co +cat,-pull,?"},
             strategy = "cat",
             tooltip = "Use cat form",
             index = 1
         },
         ["caster"] = {
             icon = "caster",
-            command = {[0] = "co +caster,?"},
+            command = {[0] = "co +caster,-pull,?"},
             strategy = "caster",
             tooltip = "Use caster form",
             index = 2
         },
         ["heal"] = {
             icon = "heal",
-            command = {[0] = "co +heal,?"},
+            command = {[0] = "co +heal,-pull,?"},
             strategy = "heal",
             tooltip = "Healer mode",
             index = 3
@@ -1450,21 +1457,21 @@ function CreateSelectedBotPanel()
     CreateToolBar(frame, -y, "CLASS_WARRIOR", {
         ["arms"] = {
             icon = "dps",
-            command = {[0] = "co +arms,+dps assist,?", [1] = "nc +dps assist,?"},
+            command = {[0] = "co +arms,+dps assist,-pull,?", [1] = "nc +dps assist,?"},
             strategy = "arms",
             tooltip = "Arms rotation",
             index = 0
         },
         ["fury"] = {
             icon = "grind",
-            command = {[0] = "co +fury,+dps assist,?", [1] = "nc +dps assist,?"},
+            command = {[0] = "co +fury,+dps assist,-pull,?", [1] = "nc +dps assist,?"},
             strategy = "fury",
             tooltip = "Fury rotation",
             index = 1
         },
         ["tank"] = {
             icon = "tank",
-            command = {[0] = "co +tank,+tank assist,?", [1] = "nc +tank assist,?"},
+            command = {[0] = "co +tank,+tank assist,+pull,?", [1] = "nc +tank assist,?"},
             strategy = "tank",
             tooltip = "Tank rotation",
             index = 2
