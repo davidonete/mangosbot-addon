@@ -2189,21 +2189,25 @@ function OnWhisper(message, sender)
     local type = "co"
 	local validStrategy = false
 	local bot = botTable[sender]
+	local trm = 19
 	if(string.find(message, 'Combat Strategies: ') == 1) then
 		type = "co"
 		validStrategy = true
+		trm = 19
 	elseif(string.find(message, 'Non Combat Strategies: ') == 1) then
 		type = "nc"
 		validStrategy = true
+		trm = 23
 	elseif(string.find(message, 'Reaction Strategies: ') == 1) then
 		type = "react"
 		validStrategy = true
+		trm = 21
 	end
     
     if (validStrategy) then
 		local list = {}
 		local role = "dps"
-        local text = string.sub(message, 13)
+        local text = string.sub(message, trm)
         local splitted = splitString2(text, ", ")
         for i = 1, tablelength(splitted) do
             local name = trim2(splitted[i])
