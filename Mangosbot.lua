@@ -1474,66 +1474,59 @@ function CreateSelectedBotPanel()
     CreateToolBar(frame, -y, "CLASS_SHAMAN", {
         ["caster"] = {
             icon = "caster",
-            command = {[0] = "#a co +caster,?"},
-            strategy = "caster",
-            tooltip = "Caster mode",
+            command = {[0] = "#a co +elemental,?", [1] = "#a nc +elemental,?", [2] = "#a de +elemental,?", [3] = "#a react +elemental,?"},
+            strategy = "elemental",
+            tooltip = "Elemental mode (caster)",
             index = 0
-        },
-        ["caster_aoe"] = {
-            icon = "caster_aoe",
-            command = {[0] = "#a co ~caster aoe,?"},
-            strategy = "caster aoe",
-            tooltip = "Use caster AOE abilities",
-            index = 1
         },
         ["heal"] = {
             icon = "heal",
-            command = {[0] = "#a co +heal,+threat,?"},
-            strategy = "heal",
-            tooltip = "Healer mode",
-            index = 2
+            command = {[0] = "#a co +restoration,+threat,?", [1] = "#a nc +restoration,?", [2] = "#a de +restoration,?", [3] = "#a react +restoration,?"},
+            strategy = "restoration",
+            tooltip = "Restoration mode (healer)",
+            index = 1
         },
         ["melee"] = {
             icon = "dps",
-            command = {[0] = "#a co +melee,?"},
-            strategy = "melee",
-            tooltip = "Melee mode",
-            index = 3
+            command = {[0] = "#a co +enhancement,-ranged,+close,?", [1] = "#a nc +enhancement,?", [2] = "#a de +enhancement,?", [3] = "#a react +enhancement,?"},
+            strategy = "enhancement",
+            tooltip = "Enhancement mode (melee)",
+            index = 2
         },
-        ["melee_aoe"] = {
-            icon = "aoe",
-            command = {[0] = "#a co ~melee aoe,?"},
-            strategy = "melee aoe",
-            tooltip = "Use melee AOE abilities",
-            index = 4
+        ["aoe"] = {
+            icon = "caster_aoe",
+            command = {[0] = "#a co ~aoe,?", [1] = "#a nc ~aoe,?"},
+            strategy = "aoe",
+            tooltip = "Use AOE abilities",
+            index = 3
         },
         ["totems"] = {
             icon = "totems",
-            command = {[0] = "#a co ~totems,?"},
+            command = {[0] = "#a co ~totems,?", [1] = "#a nc ~totems,?"},
             strategy = "totems",
             tooltip = "Use totems",
-            index = 5
+            index = 4
         },
         ["bmana"] = {
             icon = "bmana",
             command = {[0] = "#a co ~bmana,?", [1] = "#a nc ~bmana,?"},
             strategy = "bmana",
             tooltip = "Buff mana regen",
-            index = 6
+            index = 5
         },
         ["bdps"] = {
             icon = "bdps",
             command = {[0] = "#a co ~bdps,?", [1] = "#a nc ~bdps,?"},
             strategy = "bdps",
             tooltip = "Buff DPS",
-            index = 7
+            index = 6
         },
         ["cure"] = {
             icon = "cure",
             command = {[0] = "#a co ~cure,?", [1] = "#a nc ~cure,?"},
             strategy = "cure",
             tooltip = "Cure (poison, disease, etc.)",
-            index = 8
+            index = 7
         }
     })
     CreateToolBar(frame, -y, "CLASS_WARLOCK", {
