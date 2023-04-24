@@ -1463,19 +1463,47 @@ function CreateSelectedBotPanel()
         }
     })
     CreateToolBar(frame, -y, "CLASS_ROGUE", {
-        ["dps"] = {
+        ["combat"] = {
             icon = "dps",
-            command = {[0] = "#a co +dps,?"},
-            strategy = "dps",
-            tooltip = "DPS mode",
+            command = {[0] = "#a co +combat,?", [1] = "#a nc +combat,?", [2] = "#a de +combat,?", [3] = "#a react +combat,?"},
+            strategy = "combat",
+            tooltip = "Combat mode (melee)",
             index = 0
+        },
+		["assassination"] = {
+            icon = "dps",
+            command = {[0] = "#a co +assassination,?", [1] = "#a nc +assassination,?", [2] = "#a de +assassination,?", [3] = "#a react +assassination,?"},
+            strategy = "assassination",
+            tooltip = "Assassination mode (melee)",
+            index = 1
+        },
+		["subtlety"] = {
+            icon = "dps",
+            command = {[0] = "#a co +subtlety,?", [1] = "#a nc +subtlety,?", [2] = "#a de +subtlety,?", [3] = "#a react +subtlety,?"},
+            strategy = "subtlety",
+            tooltip = "Subtlety mode (melee)",
+            index = 2
         },
         ["aoe"] = {
             icon = "aoe",
-            command = {[0] = "#a co ~aoe,?"},
+            command = {[0] = "#a co ~aoe,?", [1] = "#a nc ~aoe,?"},
             strategy = "aoe",
             tooltip = "Use AOE abilities",
-            index = 1
+            index = 3
+        },
+		["poisons"] = {
+            icon = "caster_aoe",
+            command = {[0] = "#a co ~poisons,?", [1] = "#a nc ~poisons,?"},
+            strategy = "poisons",
+            tooltip = "Use poisons",
+            index = 4
+        },
+		["stealth"] = {
+            icon = "caster",
+            command = {[0] = "#a co ~stealth,?", [1] = "#a nc ~stealth,?"},
+            strategy = "stealth",
+            tooltip = "Use stealth abilities",
+            index = 5
         }
     })
     CreateToolBar(frame, -y, "CLASS_SHAMAN", {
