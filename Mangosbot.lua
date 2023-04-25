@@ -761,20 +761,12 @@ function CreateGenericNonCombatToolBar(frame, y, name, group, x, spacing, regist
             index = 0,
             group = group
         },
-        ["buff"] = {
-            icon = "bdps",
-            command = {[0] = "#a nc ~buff,?"},
-            strategy = "buff",
-            tooltip = "Buff party members",
-            index = 1,
-            group = group
-        },
         ["loot"] = {
             icon = "loot",
             command = {[0] = "#a nc ~loot,?"},
             strategy = "loot",
             tooltip = "Enable looting",
-            index = 2,
+            index = 1,
             group = group
         },
         ["gather"] = {
@@ -782,7 +774,7 @@ function CreateGenericNonCombatToolBar(frame, y, name, group, x, spacing, regist
             command = {[0] = "#a nc ~gather,?"},
             strategy = "gather",
             tooltip = "Gather herbs, ore, etc.",
-            index = 3,
+            index = 2,
             group = group
         }
     }, x, spacing, register)
@@ -822,20 +814,12 @@ function CreateGenericCombatToolBar(frame, y, name, group, x, spacing, register)
             index = 3,
             group = group
         },
-        ["boost"] = {
-            icon = "boost",
-            command = {[0] = "#a co ~boost,?"},
-            strategy = "boost",
-            tooltip = "Boost dps by using cooldowns",
-            index = 4,
-            group = group
-        },
         ["conserve_mana"] = {
             icon = "conserve_mana",
             command = {[0] = "#a co ~conserve mana,?"},
             strategy = "conserve mana",
             tooltip = "Reduce mana usage at cost of DPS",
-            index = 5,
+            index = 4,
             group = group
         },
         ["cc"] = {
@@ -843,7 +827,7 @@ function CreateGenericCombatToolBar(frame, y, name, group, x, spacing, register)
             command = {[0] = "#a co ~cc,?"},
             strategy = "cc",
             tooltip = "Use crowd control abilities",
-            index = 6,
+            index = 5,
             group = group
         }
     }, x, spacing, register)
@@ -1484,19 +1468,33 @@ function CreateSelectedBotPanel()
             tooltip = "Use AOE abilities",
             index = 3
         },
+		["bdps"] = {
+            icon = "boost",
+            command = {[0] = "#a co ~buff,?"},
+            strategy = "buff",
+            tooltip = "Use boost abilities",
+            index = 4
+        },
+		["bmana"] = {
+            icon = "bmana",
+            command = {[0] = "#a nc ~buff,?"},
+            strategy = "buff",
+            tooltip = "Use buff abilities",
+            index = 5
+        },
 		["poisons"] = {
             icon = "caster_aoe",
             command = {[0] = "#a co ~poisons,?", [1] = "#a nc ~poisons,?"},
             strategy = "poisons",
-            tooltip = "Use poisons",
-            index = 4
+            tooltip = "Auto pick poisons",
+            index = 6
         },
 		["stealth"] = {
             icon = "caster",
             command = {[0] = "#a co ~stealth,?", [1] = "#a nc ~stealth,?"},
             strategy = "stealth",
             tooltip = "Use stealth abilities",
-            index = 5
+            index = 7
         }
     })
     CreateToolBar(frame, -y, "CLASS_SHAMAN", {
@@ -1528,32 +1526,32 @@ function CreateSelectedBotPanel()
             tooltip = "Use AOE abilities",
             index = 3
         },
-        ["totems"] = {
-            icon = "totems",
-            command = {[0] = "#a co ~totems,?", [1] = "#a nc ~totems,?"},
-            strategy = "totems",
-            tooltip = "Use totems",
+        ["bdps"] = {
+            icon = "boost",
+            command = {[0] = "#a co ~buff,?"},
+            strategy = "buff",
+            tooltip = "Use boost abilities",
             index = 4
         },
-        ["bmana"] = {
+		["bmana"] = {
             icon = "bmana",
-            command = {[0] = "#a co ~bmana,?", [1] = "#a nc ~bmana,?"},
-            strategy = "bmana",
-            tooltip = "Buff mana regen",
+            command = {[0] = "#a nc ~buff,?"},
+            strategy = "buff",
+            tooltip = "Use buff abilities",
             index = 5
-        },
-        ["bdps"] = {
-            icon = "bdps",
-            command = {[0] = "#a co ~bdps,?", [1] = "#a nc ~bdps,?"},
-            strategy = "bdps",
-            tooltip = "Buff DPS",
-            index = 6
         },
         ["cure"] = {
             icon = "cure",
             command = {[0] = "#a co ~cure,?", [1] = "#a nc ~cure,?"},
             strategy = "cure",
             tooltip = "Cure (poison, disease, etc.)",
+            index = 6
+        },
+		["totems"] = {
+            icon = "totems",
+            command = {[0] = "#a co +totems,?", [1] = "#a nc +totems,?"},
+            strategy = "totems",
+            tooltip = "Auto pick totems",
             index = 7
         }
     })
@@ -1656,6 +1654,87 @@ function CreateSelectedBotPanel()
             index = 3
         }
     })
+	CreateToolBar(frame, -y, "CLASS_SHAMAN_TOTEM_EARTH", {
+		["stoneclaw"] = {
+            icon = "totems",
+            command = {[0] = "#a co +totem earth stoneclaw,?", [1] = "#a nc +totem earth stoneclaw,?"},
+            strategy = "totem earth stoneclaw",
+            tooltip = "Stoneclaw totem (earth)",
+            index = 0
+        },
+		["stoneskin"] = {
+            icon = "totems",
+            command = {[0] = "#a co +totem earth stoneskin,?", [1] = "#a nc +totem earth stoneskin,?"},
+            strategy = "totem earth stoneskin",
+            tooltip = "Stoneskin totem (earth)",
+            index = 1
+        },
+		["earthbind"] = {
+            icon = "totems",
+            command = {[0] = "#a co +totem earth earthbind,?", [1] = "#a nc +totem earth earthbind,?"},
+            strategy = "totem earth earthbind",
+            tooltip = "Earthbind totem (earth)",
+            index = 2
+        },
+		["strength"] = {
+            icon = "totems",
+            command = {[0] = "#a co +totem earth strength,?", [1] = "#a nc +totem earth strength,?"},
+            strategy = "totem earth strength",
+            tooltip = "Strength of Earth totem (earth)",
+            index = 3
+        },
+		["tremor"] = {
+            icon = "totems",
+            command = {[0] = "#a co +totem earth tremor,?", [1] = "#a nc +totem earth tremor,?"},
+            strategy = "totem earth tremor",
+            tooltip = "Tremor totem (earth)",
+            index = 4
+        }
+	})
+	CreateToolBar(frame, -y, "CLASS_ROGUE_POISON_MAIN", {
+		["deadly"] = {
+            icon = "caster_aoe",
+            command = {[0] = "#a co +poison main deadly,?", [1] = "#a nc +poison main deadly,?"},
+            strategy = "poison main deadly",
+            tooltip = "Deadly Poison (main hand)",
+            index = 0
+        },
+		["crippling"] = {
+            icon = "caster_aoe",
+            command = {[0] = "#a co +poison main crippling,?", [1] = "#a nc +poison main crippling,?"},
+            strategy = "poison main crippling",
+            tooltip = "Crippling Poison (main hand)",
+            index = 1
+        },
+		["mind"] = {
+            icon = "caster_aoe",
+            command = {[0] = "#a co +poison main mind,?", [1] = "#a nc +poison main mind,?"},
+            strategy = "poison main mind",
+            tooltip = "Mind-Numbing Poison (main hand)",
+            index = 2
+        },
+		["instant"] = {
+            icon = "caster_aoe",
+            command = {[0] = "#a co +poison main instant,?", [1] = "#a nc +poison main instant,?"},
+            strategy = "poison main instant",
+            tooltip = "Instant Poison (main hand)",
+            index = 3
+        },
+		["wound"] = {
+            icon = "caster_aoe",
+            command = {[0] = "#a co +poison main wound,?", [1] = "#a nc +poison main wound,?"},
+            strategy = "poison main wound",
+            tooltip = "Wound Poison (main hand)",
+            index = 4
+        },
+		["anesthetic"] = {
+            icon = "caster_aoe",
+            command = {[0] = "#a co +poison main anesthetic,?", [1] = "#a nc +poison main anesthetic,?"},
+            strategy = "poison main anesthetic",
+            tooltip = "Anesthetic Poison (main hand)",
+            index = 5
+        }
+	})
     
     y = y + 25
     CreateToolBar(frame, -y, "CLASS_PALADIN_AURA", {
@@ -1695,7 +1774,179 @@ function CreateSelectedBotPanel()
             index = 4
         }
     })
-    
+	CreateToolBar(frame, -y, "CLASS_SHAMAN_TOTEM_FIRE", {
+		["nova"] = {
+            icon = "totems",
+            command = {[0] = "#a co +totem fire nova,?", [1] = "#a nc +totem fire nova,?"},
+            strategy = "totem fire nova",
+            tooltip = "Fire Nova totem (fire)",
+            index = 0
+        },
+		["flametongue"] = {
+            icon = "totems",
+            command = {[0] = "#a co +totem fire flametongue,?", [1] = "#a nc +totem fire flametongue,?"},
+            strategy = "totem fire flametongue",
+            tooltip = "Flametongue totem (fire)",
+            index = 1
+        },
+		["resistance"] = {
+            icon = "totems",
+            command = {[0] = "#a co +totem fire resistance,?", [1] = "#a nc +totem fire resistance,?"},
+            strategy = "totem fire resistance",
+            tooltip = "Frost Resistance totem (fire)",
+            index = 2
+        },
+		["magma"] = {
+            icon = "totems",
+            command = {[0] = "#a co +totem fire magma,?", [1] = "#a nc +totem fire magma,?"},
+            strategy = "totem fire magma",
+            tooltip = "Magma totem (fire)",
+            index = 3
+        },
+		["searing"] = {
+            icon = "totems",
+            command = {[0] = "#a co +totem fire searing,?", [1] = "#a nc +totem fire searing,?"},
+            strategy = "totem fire searing",
+            tooltip = "Searing totem (fire)",
+            index = 4
+        }
+	})
+	CreateToolBar(frame, -y, "CLASS_ROGUE_POISON_OFF", {
+		["deadly"] = {
+            icon = "caster_aoe",
+            command = {[0] = "#a co +poison off deadly,?", [1] = "#a nc +poison off deadly,?"},
+            strategy = "poison off deadly",
+            tooltip = "Deadly Poison (off hand)",
+            index = 0
+        },
+		["crippling"] = {
+            icon = "caster_aoe",
+            command = {[0] = "#a co +poison off crippling,?", [1] = "#a nc +poison off crippling,?"},
+            strategy = "poison off crippling",
+            tooltip = "Crippling Poison (off hand)",
+            index = 1
+        },
+		["mind"] = {
+            icon = "caster_aoe",
+            command = {[0] = "#a co +poison off mind,?", [1] = "#a nc +poison off mind,?"},
+            strategy = "poison off mind",
+            tooltip = "Mind-Numbing Poison (off hand)",
+            index = 2
+        },
+		["instant"] = {
+            icon = "caster_aoe",
+            command = {[0] = "#a co +poison off instant,?", [1] = "#a nc +poison off instant,?"},
+            strategy = "poison off instant",
+            tooltip = "Instant Poison (off hand)",
+            index = 3
+        },
+		["wound"] = {
+            icon = "caster_aoe",
+            command = {[0] = "#a co +poison off wound,?", [1] = "#a nc +poison off wound,?"},
+            strategy = "poison off wound",
+            tooltip = "Wound Poison (off hand)",
+            index = 4
+        },
+		["anesthetic"] = {
+            icon = "caster_aoe",
+            command = {[0] = "#a co +poison off anesthetic,?", [1] = "#a nc +poison off anesthetic,?"},
+            strategy = "poison off anesthetic",
+            tooltip = "Anesthetic Poison (off hand)",
+            index = 5
+        }
+	})
+	
+	y = y + 25
+	CreateToolBar(frame, -y, "CLASS_SHAMAN_TOTEM_WATER", {
+		["cleansing"] = {
+            icon = "totems",
+            command = {[0] = "#a co +totem water cleansing,?", [1] = "#a nc +totem water cleansing,?"},
+            strategy = "totem water cleansing",
+            tooltip = "Cleansing totem (water)",
+            index = 0
+        },
+		["resistance"] = {
+            icon = "totems",
+            command = {[0] = "#a co +totem water resistance,?", [1] = "#a nc +totem water resistance,?"},
+            strategy = "totem water resistance",
+            tooltip = "Fire Resistance totem (water)",
+            index = 1
+        },
+		["healing"] = {
+            icon = "totems",
+            command = {[0] = "#a co +totem water healing,?", [1] = "#a nc +totem water healing,?"},
+            strategy = "totem water healing",
+            tooltip = "Healing Stream totem (water)",
+            index = 2
+        },
+		["mana"] = {
+            icon = "totems",
+            command = {[0] = "#a co +totem water mana,?", [1] = "#a nc +totem water mana,?"},
+            strategy = "totem water mana",
+            tooltip = "Mana Spring totem (water)",
+            index = 3
+        },
+		["poison"] = {
+            icon = "totems",
+            command = {[0] = "#a co +totem water poison,?", [1] = "#a nc +totem water poison,?"},
+            strategy = "totem water poison",
+            tooltip = "Poison Cleansing totem (water)",
+            index = 4
+        }
+	})
+	
+	y = y + 25
+	CreateToolBar(frame, -y, "CLASS_SHAMAN_TOTEM_AIR", {
+		["grace"] = {
+            icon = "totems",
+            command = {[0] = "#a co +totem air grace,?", [1] = "#a nc +totem air grace,?"},
+            strategy = "totem air grace",
+            tooltip = "Grace of Air totem (air)",
+            index = 0
+        },
+		["grounding"] = {
+            icon = "totems",
+            command = {[0] = "#a co +totem air grounding,?", [1] = "#a nc +totem air grounding,?"},
+            strategy = "totem air grounding",
+            tooltip = "Grounding totem (air)",
+            index = 1
+        },
+		["resistance"] = {
+            icon = "totems",
+            command = {[0] = "#a co +totem air resistance,?", [1] = "#a nc +totem air resistance,?"},
+            strategy = "totem air resistance",
+            tooltip = "Nature Resistance totem (air)",
+            index = 2
+        },
+		["tranquil"] = {
+            icon = "totems",
+            command = {[0] = "#a co +totem air tranquil,?", [1] = "#a nc +totem air tranquil,?"},
+            strategy = "totem air tranquil",
+            tooltip = "Tranquil Air totem (air)",
+            index = 3
+        },
+		["windfury"] = {
+            icon = "totems",
+            command = {[0] = "#a co +totem air windfury,?", [1] = "#a nc +totem air windfury,?"},
+            strategy = "totem air windfury",
+            tooltip = "Windfury totem (air)",
+            index = 4
+        },
+		["windwall"] = {
+            icon = "totems",
+            command = {[0] = "#a co +totem air windwall,?", [1] = "#a nc +totem air windwall,?"},
+            strategy = "totem air windwall",
+            tooltip = "Windwall totem (air)",
+            index = 5
+        },
+		["wrath"] = {
+            icon = "totems",
+            command = {[0] = "#a co +totem air wrath,?", [1] = "#a nc +totem air wrath,?"},
+            strategy = "totem air wrath",
+            tooltip = "Wrath of Air totem (air)",
+            index = 6
+        }
+	})
 
     frame:SetHeight(y + 25)
     return frame
