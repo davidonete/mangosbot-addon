@@ -1303,59 +1303,45 @@ function CreateSelectedBotPanel()
     CreateToolBar(frame, -y, "CLASS_MAGE", {
         ["arcane"] = {
             icon = "arcane",
-            command = {[0] = "#a co +arcane,?"},
+            command = {[0] = "#a co +arcane,?", [1] = "#a nc +arcane,?", [2] = "#a de +arcane,?", [3] = "#a react +arcane,?"},
             strategy = "arcane",
-            tooltip = "Use arcane spells",
+            tooltip = "Arcane mode (caster)",
             index = 0
         },
         ["fire"] = {
             icon = "fire",
-            command = {[0] = "#a co +fire,?"},
+            command = {[0] = "#a co +fire,?", [1] = "#a nc +fire,?", [2] = "#a de +fire,?", [3] = "#a react +fire,?"},
             strategy = "fire",
-            tooltip = "Use fire spells",
+            tooltip = "Fire mode (caster)",
             index = 1
-        },
-        ["fire_aoe"] = {
-            icon = "fire_aoe",
-            command = {[0] = "#a co ~fire aoe,?"},
-            strategy = "fire aoe",
-            tooltip = "Use fire AOE abilities",
-            index = 2
         },
         ["frost"] = {
             icon = "frost",
-            command = {[0] = "#a co +frost,?"},
+            command = {[0] = "#a co +frost,?", [1] = "#a nc +frost,?", [2] = "#a de +frost,?", [3] = "#a react +frost,?"},
             strategy = "frost",
-            tooltip = "Use frost spells",
+            tooltip = "Frost mode (caster)",
+            index = 2
+        },
+		["aoe"] = {
+            icon = "caster_aoe",
+            command = {[0] = "#a co ~aoe,?", [1] = "#a nc ~aoe,?"},
+            strategy = "aoe",
+            tooltip = "Use AOE abilities",
             index = 3
         },
-        ["frost_aoe"] = {
-            icon = "frost_aoe",
-            command = {[0] = "#a co ~frost aoe,?"},
-            strategy = "frost aoe",
-            tooltip = "Use frost AOE abilities",
-            index = 4
-        },
-        ["bmana"] = {
-            icon = "bmana",
-            command = {[0] = "#a co ~bmana,?", [1] = "#a nc ~bmana,?"},
-            strategy = "bmana",
-            tooltip = "Buff mana regen",
-            index = 5
-        },
         ["bdps"] = {
-            icon = "bdps",
-            command = {[0] = "#a co ~bdps,?", [1] = "#a nc ~bdps,?"},
-            strategy = "bdps",
-            tooltip = "Buff DPS",
-            index = 6
+            icon = "boost",
+            command = {[0] = "#a co ~buff,?", [1] = "#a nc ~buff,?"},
+            strategy = "buff",
+            tooltip = "Use buff abilities (cooldowns, trinkets, buffs)",
+            index = 4
         },
         ["cure"] = {
             icon = "cure",
             command = {[0] = "#a co ~cure,?", [1] = "#a nc ~cure,?"},
             strategy = "cure",
-            tooltip = "Cure (poison, disease, etc.)",
-            index = 7
+            tooltip = "Use cure abilities (curses)",
+            index = 5
         }
     })
     CreateToolBar(frame, -y, "CLASS_PALADIN", {
@@ -1475,46 +1461,39 @@ function CreateSelectedBotPanel()
             tooltip = "Use AOE abilities",
             index = 3
         },
-		["bdps"] = {
+        ["bdps"] = {
             icon = "boost",
-            command = {[0] = "#a co ~buff,?"},
+            command = {[0] = "#a co ~buff,?", [1] = "#a nc ~buff,?"},
             strategy = "buff",
-            tooltip = "Use boost abilities",
+            tooltip = "Use buff abilities (cooldowns, trinkets, buffs)",
             index = 4
-        },
-		["bmana"] = {
-            icon = "bmana",
-            command = {[0] = "#a nc ~buff,?"},
-            strategy = "buff",
-            tooltip = "Use buff abilities",
-            index = 5
         },
 		["poisons"] = {
             icon = "caster_aoe",
             command = {[0] = "#a co ~poisons,?", [1] = "#a nc ~poisons,?"},
             strategy = "poisons",
             tooltip = "Auto pick poisons",
-            index = 6
+            index = 5
         },
 		["stealth"] = {
             icon = "caster",
             command = {[0] = "#a co ~stealth,?", [1] = "#a nc ~stealth,?"},
             strategy = "stealth",
             tooltip = "Use stealth abilities",
-            index = 7
+            index = 6
         }
     })
     CreateToolBar(frame, -y, "CLASS_SHAMAN", {
         ["caster"] = {
             icon = "caster",
-            command = {[0] = "#a co +elemental,?", [1] = "#a nc +elemental,?", [2] = "#a de +elemental,?", [3] = "#a react +elemental,?"},
+            command = {[0] = "#a co +elemental,+ranged,-close,?", [1] = "#a nc +elemental,?", [2] = "#a de +elemental,?", [3] = "#a react +elemental,?"},
             strategy = "elemental",
             tooltip = "Elemental mode (caster)",
             index = 0
         },
         ["heal"] = {
             icon = "heal",
-            command = {[0] = "#a co +restoration,+threat,?", [1] = "#a nc +restoration,?", [2] = "#a de +restoration,?", [3] = "#a react +restoration,?"},
+            command = {[0] = "#a co +restoration,+threat,+ranged,-close,?", [1] = "#a nc +restoration,?", [2] = "#a de +restoration,?", [3] = "#a react +restoration,?"},
             strategy = "restoration",
             tooltip = "Restoration mode (healer)",
             index = 1
@@ -1535,31 +1514,24 @@ function CreateSelectedBotPanel()
         },
         ["bdps"] = {
             icon = "boost",
-            command = {[0] = "#a co ~buff,?"},
+            command = {[0] = "#a co ~buff,?", [1] = "#a nc ~buff,?"},
             strategy = "buff",
-            tooltip = "Use boost abilities",
+            tooltip = "Use buff abilities (cooldowns, trinkets, buffs)",
             index = 4
-        },
-		["bmana"] = {
-            icon = "bmana",
-            command = {[0] = "#a nc ~buff,?"},
-            strategy = "buff",
-            tooltip = "Use buff abilities",
-            index = 5
         },
         ["cure"] = {
             icon = "cure",
             command = {[0] = "#a co ~cure,?", [1] = "#a nc ~cure,?"},
             strategy = "cure",
-            tooltip = "Cure (poison, disease, etc.)",
-            index = 6
+            tooltip = "Use cure abilities (poison and disease)",
+            index = 5
         },
 		["totems"] = {
             icon = "totems",
             command = {[0] = "#a co +totems,?", [1] = "#a nc +totems,?"},
             strategy = "totems",
             tooltip = "Auto pick totems",
-            index = 7
+            index = 6
         }
     })
     CreateToolBar(frame, -y, "CLASS_WARLOCK", {
