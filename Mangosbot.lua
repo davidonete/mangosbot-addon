@@ -1524,47 +1524,61 @@ function CreateSelectedBotPanel()
         },
 		["totems"] = {
             icon = "totems",
-            command = {[0] = "#a co +totems,?", [1] = "#a nc +totems,?"},
+            command = {[0] = "#a co ~totems,?", [1] = "#a nc ~totems,?"},
             strategy = "totems",
             tooltip = "Auto pick totems",
             index = 6
         }
     })
     CreateToolBar(frame, -y, "CLASS_WARLOCK", {
-        ["dps"] = {
+        ["affliction"] = {
             icon = "dps",
-            command = {[0] = "#a co +dps,?"},
-            strategy = "dps",
-            tooltip = "DPS mode",
+            command = {[0] = "#a co +affliction,?", [1] = "#a nc +affliction,?", [2] = "#a de +affliction,?", [3] = "#a react +affliction,?"},
+            strategy = "affliction",
+            tooltip = "Affliction mode (caster)",
             index = 0
+        },
+        ["demonology"] = {
+            icon = "dps",
+            command = {[0] = "#a co +demonology,?", [1] = "#a nc +demonology,?", [2] = "#a de +demonology,?", [3] = "#a react +demonology,?"},
+            strategy = "demonology",
+            tooltip = "Demonology mode (caster)",
+            index = 1
+        },
+		["destruction"] = {
+            icon = "dps",
+            command = {[0] = "#a co +destruction,?", [1] = "#a nc +destruction,?", [2] = "#a de +destruction,?", [3] = "#a react +destruction,?"},
+            strategy = "destruction",
+            tooltip = "Destruction mode (caster)",
+            index = 2
+        },
+		["aoe"] = {
+            icon = "aoe",
+            command = {[0] = "#a co ~aoe,?", [1] = "#a nc ~aoe,?"},
+            strategy = "aoe",
+            tooltip = "Use AOE abilities",
+            index = 3
+        },
+        ["bdps"] = {
+            icon = "boost",
+            command = {[0] = "#a co ~buff,?", [1] = "#a nc ~buff,?"},
+            strategy = "buff",
+            tooltip = "Use buff abilities (cooldowns, trinkets, buffs)",
+            index = 4
         },
         ["dps_debuff"] = {
             icon = "dps_debuff",
-            command = {[0] = "#a co ~dps debuff,?"},
-            strategy = "dps debuff",
-            tooltip = "Use DPS debuffs",
-            index = 1
-        },
-        ["caster_aoe"] = {
-            icon = "caster_aoe",
-            command = {[0] = "#a co ~aoe,?"},
-            strategy = "aoe",
-            tooltip = "Use AOE abilities",
-            index = 2
-        },
-        ["tank"] = {
-            icon = "tank",
-            command = {[0] = "#a co +tank,?"},
-            strategy = "tank",
-            tooltip = "Summon tanky demons",
-            index = 3
+            command = {[0] = "#a co ~dps curse,?"},
+            strategy = "curse",
+            tooltip = "Auto pick curses",
+            index = 5
         },
         ["pet"] = {
             icon = "pet",
             command = {[0] = "#a co ~pet,?", [1] = "#a nc ~pet,?"},
             strategy = "pet",
-            tooltip = "Use pet",
-            index = 4
+            tooltip = "Auto pick pets",
+            index = 6
         }
     })
     CreateToolBar(frame, -y, "CLASS_WARRIOR", {
@@ -1710,6 +1724,57 @@ function CreateSelectedBotPanel()
             index = 5
         }
 	})
+	CreateToolBar(frame, -y, "CLASS_WARLOCK_CURSES", {
+		["agony"] = {
+            icon = "caster_aoe",
+            command = {[0] = "#a co +curse agony,?"},
+            strategy = "curse agony",
+            tooltip = "Curse of Agony",
+            index = 0
+        },
+		["doom"] = {
+            icon = "caster_aoe",
+            command = {[0] = "#a co +curse doom,?"},
+            strategy = "curse doom",
+            tooltip = "Curse of Doom",
+            index = 1
+        },
+		["elements"] = {
+            icon = "caster_aoe",
+            command = {[0] = "#a co +curse elements,?"},
+            strategy = "curse elements",
+            tooltip = "Curse of the Elements",
+            index = 2
+        },
+		["recklessness"] = {
+            icon = "caster_aoe",
+            command = {[0] = "#a co +curse recklessness,?"},
+            strategy = "curse recklessness",
+            tooltip = "Curse of Recklessness",
+            index = 3
+        },
+		["weakness"] = {
+            icon = "caster_aoe",
+            command = {[0] = "#a co +curse weakness,?"},
+            strategy = "curse weakness",
+            tooltip = "Curse of Weakness",
+            index = 4
+        },
+		["tongues"] = {
+            icon = "caster_aoe",
+            command = {[0] = "#a co +curse tongues,?"},
+            strategy = "curse tongues",
+            tooltip = "Curse of Tongues",
+            index = 5
+        },
+		["shadow"] = {
+            icon = "caster_aoe",
+            command = {[0] = "#a co +curse shadow,?"},
+            strategy = "curse shadow",
+            tooltip = "Curse of Shadow",
+            index = 6
+        }
+	})
     
     y = y + 25
     CreateToolBar(frame, -y, "CLASS_PALADIN_AURA", {
@@ -1828,6 +1893,43 @@ function CreateSelectedBotPanel()
             strategy = "poison off anesthetic",
             tooltip = "Anesthetic Poison (off hand)",
             index = 5
+        }
+	})
+	CreateToolBar(frame, -y, "CLASS_WARLOCK_PETS", {
+		["imp"] = {
+            icon = "pet",
+            command = {[0] = "#a co +pet imp,?", [1] = "#a nc +pet imp,?"},
+            strategy = "pet imp",
+            tooltip = "Use Imp",
+            index = 0
+        },
+		["voidwalker"] = {
+            icon = "pet",
+            command = {[0] = "#a co +pet voidwalker,?", [1] = "#a nc +pet voidwalker,?"},
+            strategy = "pet voidwalker",
+            tooltip = "Use Voidwalker",
+            index = 1
+        },
+		["succubus"] = {
+            icon = "pet",
+            command = {[0] = "#a co +pet succubus,?", [1] = "#a nc +pet succubus,?"},
+            strategy = "pet succubus",
+            tooltip = "Use Succubus",
+            index = 2
+        },
+		["felhunter"] = {
+            icon = "pet",
+            command = {[0] = "#a co +pet felhunter,?", [1] = "#a nc +pet felhunter,?"},
+            strategy = "pet felhunter",
+            tooltip = "Use Felhunter",
+            index = 3
+        },
+		["felguard"] = {
+            icon = "pet",
+            command = {[0] = "#a co +pet felguard,?", [1] = "#a nc +pet felguard,?"},
+            strategy = "pet felguard",
+            tooltip = "Use Felguard",
+            index = 4
         }
 	})
 	
