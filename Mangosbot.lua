@@ -1347,38 +1347,59 @@ function CreateSelectedBotPanel()
     CreateToolBar(frame, -y, "CLASS_PALADIN", {
         ["dps"] = {
             icon = "dps",
-            command = {[0] = "#a co +dps,?"},
-            strategy = "dps",
-            tooltip = "DPS mode",
+            command = {[0] = "#a co +retribution,-ranged,+close,?", [1] = "#a nc +retribution,?", [2] = "#a de +retribution,?", [3] = "#a react +retribution,?"},
+            strategy = "retribution",
+            tooltip = "Retribution mode (melee)",
             index = 0
         },
         ["tank"] = {
             icon = "tank",
-            command = {[0] = "#a co +tank,?"},
-            strategy = "tank",
-            tooltip = "Tank mode",
+            command = {[0] = "#a co +protection,-ranged,+close,+pull,+tank assist,?", [1] = "#a nc +protection,?", [2] = "#a de +protection,?", [3] = "#a react +protection,?"},
+            strategy = "protection",
+            tooltip = "Protection mode (tank)",
             index = 1
         },
         ["heal"] = {
             icon = "heal",
-            command = {[0] = "#a co +heal,?"},
-            strategy = "heal",
-            tooltip = "Healer mode",
+            command = {[0] = "#a co +holy,+ranged,-close,?", [1] = "#a nc +holy,?", [2] = "#a de +holy,?", [3] = "#a react +holy,?"},
+            strategy = "holy",
+            tooltip = "Holy mode (healer)",
             index = 2
+        },
+		["aoe"] = {
+            icon = "caster_aoe",
+            command = {[0] = "#a co ~aoe,?", [1] = "#a nc ~aoe,?"},
+            strategy = "aoe",
+            tooltip = "Use AOE abilities",
+            index = 3
+        },
+        ["bdps"] = {
+            icon = "boost",
+            command = {[0] = "#a co ~buff,?", [1] = "#a nc ~buff,?"},
+            strategy = "buff",
+            tooltip = "Use buff abilities (cooldowns, trinkets, buffs)",
+            index = 4
         },
         ["cure"] = {
             icon = "cure",
             command = {[0] = "#a co ~cure,?", [1] = "#a nc ~cure,?"},
             strategy = "cure",
-            tooltip = "Cure (poison, disease, etc.)",
-            index = 3
+            tooltip = "Use cure abilities (curses)",
+            index = 5
         },
-        ["bthreat"] = {
-            icon = "bthreat",
-            command = {[0] = "#a nc ~bthreat,?"},
-            strategy = "bthreat",
-            tooltip = "Increase threat generation",
-            index = 4
+		["aura"] = {
+            icon = "bmana",
+            command = {[0] = "#a co ~aura,?", [1] = "#a nc ~aura,?"},
+            strategy = "aura",
+            tooltip = "Auto pick aura",
+            index = 6
+        },
+		["blessing"] = {
+            icon = "bspeed",
+            command = {[0] = "#a co ~blessing,?", [1] = "#a nc ~blessing,?"},
+            strategy = "blessing",
+            tooltip = "Auto pick blessings",
+            index = 7
         }
     })
     CreateToolBar(frame, -y, "CLASS_PRIEST", {
@@ -1572,7 +1593,7 @@ function CreateSelectedBotPanel()
         },
         ["dps_debuff"] = {
             icon = "dps_debuff",
-            command = {[0] = "#a co ~dps curse,?"},
+            command = {[0] = "#a co ~curse,?"},
             strategy = "curse",
             tooltip = "Auto pick curses",
             index = 5
@@ -1617,34 +1638,48 @@ function CreateSelectedBotPanel()
     })
     
     y = y + 25
-    CreateToolBar(frame, -y, "CLASS_PALADIN_BUFF", {
+    CreateToolBar(frame, -y, "CLASS_PALADIN_BLESSING", {
         ["bmana"] = {
             icon = "bmana",
-            command = {[0] = "#a co +bmana,?", [1] = "#a nc +bmana,?"},
-            strategy = "bmana",
-            tooltip = "Buff mana regen",
+            command = {[0] = "#a co +blessing might,?", [1] = "#a nc +blessing might,?"},
+            strategy = "blessing might",
+            tooltip = "Blessing of Might",
             index = 0
         },
         ["bhealth"] = {
             icon = "bhealth",
-            command = {[0] = "#a co +bhealth,?", [1] = "#a nc +bhealth,?"},
-            strategy = "bhealth",
-            tooltip = "Buff health regen",
+            command = {[0] = "#a co +blessing wisdom,?", [1] = "#a nc +blessing wisdom,?"},
+            strategy = "blessing wisdom",
+            tooltip = "Blessing of Wisdom",
             index = 1
         },
         ["bdps"] = {
             icon = "bdps",
-            command = {[0] = "#a co +bdps,?", [1] = "#a nc +bdps,?"},
-            strategy = "bdps",
-            tooltip = "Buff melee DPS",
+            command = {[0] = "#a co +blessing kings,?", [1] = "#a nc +blessing kings,?"},
+            strategy = "blessing kings",
+            tooltip = "Blessing of Kings",
             index = 2
         },
-        ["bstats"] = {
-            icon = "holy",
-            command = {[0] = "#a co +bstats,?", [1] = "#a nc +bstats,?"},
-            strategy = "bstats",
-            tooltip = "Buff stats",
+        ["barmor"] = {
+            icon = "barmor",
+            command = {[0] = "#a co +blessing sanctuary,?", [1] = "#a nc +blessing sanctuary,?"},
+            strategy = "blessing sanctuary",
+            tooltip = "Blessing of Sanctuary",
             index = 3
+        },
+        ["blight"] = {
+            icon = "bmana",
+            command = {[0] = "#a co +blessing light,?", [1] = "#a nc +blessing light,?"},
+            strategy = "blessing light",
+            tooltip = "Blessing of Light",
+            index = 4
+        },
+        ["bstats"] = {
+            icon = "bhealth",
+            command = {[0] = "#a co +blessing salvation,?", [1] = "#a nc +blessing salvation,?"},
+            strategy = "blessing salvation",
+            tooltip = "Blessing of salvation",
+            index = 5
         }
     })
 	CreateToolBar(frame, -y, "CLASS_SHAMAN_TOTEM_EARTH", {
@@ -1782,40 +1817,61 @@ function CreateSelectedBotPanel()
     
     y = y + 25
     CreateToolBar(frame, -y, "CLASS_PALADIN_AURA", {
-        ["baoe"] = {
-            icon = "aoe",
-            command = {[0] = "#a co +baoe,?", [1] = "#a nc +baoe,?"},
-            strategy = "baoe",
-            tooltip = "Retribution aura",
+	    ["barmor"] = {
+            icon = "barmor",
+            command = {[0] = "#a co +aura devotion,?", [1] = "#a nc +aura devotion,?"},
+            strategy = "aura devotion",
+            tooltip = "Devotion aura",
             index = 0
         },
-        ["rfire"] = {
-            icon = "fire",
-            command = {[0] = "#a co +rfire,?", [1] = "#a nc +rfire,?"},
-            strategy = "rfire",
-            tooltip = "Fire resistance aura",
+        ["baoe"] = {
+            icon = "aoe",
+            command = {[0] = "#a co +aura retribution,?", [1] = "#a nc +aura retribution,?"},
+            strategy = "aura retribution",
+            tooltip = "Retribution aura",
             index = 1
         },
-        ["rfrost"] = {
-            icon = "frost",
-            command = {[0] = "#a co +rfrost,?", [1] = "#a nc +rfrost,?"},
-            strategy = "rfrost",
-            tooltip = "Frost resistance aura",
+		["concentration"] = {
+            icon = "bmana",
+            command = {[0] = "#a co +aura concentration,?", [1] = "#a nc +aura concentration,?"},
+            strategy = "aura concentration",
+            tooltip = "Concentration aura",
             index = 2
         },
         ["rshadow"] = {
             icon = "rshadow",
-            command = {[0] = "#a co +rshadow,?", [1] = "#a nc +rshadow,?"},
-            strategy = "rshadow",
+            command = {[0] = "#a co +aura shadow,?", [1] = "#a nc +aura shadow,?"},
+            strategy = "aura shadow",
             tooltip = "Shadow resistance aura",
             index = 3
         },
-        ["barmor"] = {
-            icon = "barmor",
-            command = {[0] = "#a co +barmor,?", [1] = "#a nc +barmor,?"},
-            strategy = "barmor",
-            tooltip = "Devotion aura",
+        ["rfrost"] = {
+            icon = "frost",
+            command = {[0] = "#a co +aura frost,?", [1] = "#a nc +aura frost,?"},
+            strategy = "aura frost",
+            tooltip = "Frost resistance aura",
             index = 4
+        },
+        ["rfire"] = {
+            icon = "fire",
+            command = {[0] = "#a co +aura fire,?", [1] = "#a nc +aura fire,?"},
+            strategy = "aura fire",
+            tooltip = "Fire resistance aura",
+            index = 5
+        },
+        ["crusader"] = {
+            icon = "bspeed",
+            command = {[0] = "#a co +aura crusader,?", [1] = "#a nc +aura crusader,?"},
+            strategy = "aura crusader",
+            tooltip = "Crusader aura",
+            index = 6
+        },
+        ["sanctity"] = {
+            icon = "bdps",
+            command = {[0] = "#a co +aura sanctity,?", [1] = "#a nc +aura sanctity,?"},
+            strategy = "aura sanctity",
+            tooltip = "Sanctity aura",
+            index = 7
         }
     })
 	CreateToolBar(frame, -y, "CLASS_SHAMAN_TOTEM_FIRE", {
