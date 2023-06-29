@@ -1362,21 +1362,21 @@ function CreateSelectedBotPanel()
         }
     })
     CreateToolBar(frame, -y, "CLASS_PALADIN", {
-        ["dps"] = {
+        ["retribution"] = {
             icon = "dps",
-            command = {[0] = "#a co +retribution,-ranged,+close,?", [1] = "#a nc +retribution,?", [2] = "#a de +retribution,?", [3] = "#a react +retribution,?"},
+            command = {[0] = "#a co +retribution,+dps assist,+close,-ranged,-pull,?", [1] = "#a nc +retribution,?", [2] = "#a de +retribution,?", [3] = "#a react +retribution,?"},
             strategy = "retribution",
             tooltip = "Retribution mode (melee)",
             index = 0
         },
-        ["tank"] = {
+        ["protection"] = {
             icon = "tank",
-            command = {[0] = "#a co +protection,-ranged,+close,+pull,+tank assist,?", [1] = "#a nc +protection,?", [2] = "#a de +protection,?", [3] = "#a react +protection,?"},
+            command = {[0] = "#a co +protection,+close,+pull,+tank assist,-ranged,?", [1] = "#a nc +protection,?", [2] = "#a de +protection,?", [3] = "#a react +protection,?"},
             strategy = "protection",
             tooltip = "Protection mode (tank)",
             index = 1
         },
-        ["heal"] = {
+        ["holy"] = {
             icon = "heal",
             command = {[0] = "#a co +holy,+ranged,-close,?", [1] = "#a nc +holy,?", [2] = "#a de +holy,?", [3] = "#a react +holy,?"},
             strategy = "holy",
@@ -1626,32 +1626,39 @@ function CreateSelectedBotPanel()
     CreateToolBar(frame, -y, "CLASS_WARRIOR", {
         ["arms"] = {
             icon = "dps",
-            command = {[0] = "#a co +arms,+dps assist,-pull,?", [1] = "#a nc +dps assist,?"},
+            command = {[0] = "#a co +arms,+dps assist,-pull,?", [1] = "#a nc +arms,?", [2] = "#a de +arms,?", [3] = "#a react +arms,?"},
             strategy = "arms",
-            tooltip = "Arms rotation",
+            tooltip = "Arms mode (melee)",
             index = 0
         },
         ["fury"] = {
             icon = "grind",
-            command = {[0] = "#a co +fury,+dps assist,-pull,?", [1] = "#a nc +dps assist,?"},
+            command = {[0] = "#a co +fury,+dps assist,-pull,?", [1] = "#a nc +fury,?", [2] = "#a de +fury,?", [3] = "#a react +fury,?"},
             strategy = "fury",
-            tooltip = "Fury rotation",
+            tooltip = "Fury mode (melee)",
             index = 1
         },
-        ["tank"] = {
+        ["protection"] = {
             icon = "tank",
-            command = {[0] = "#a co +tank,+tank assist,+pull,?", [1] = "#a nc +tank assist,?"},
-            strategy = "tank",
-            tooltip = "Tank rotation",
+            command = {[0] = "#a co +protection,+tank assist,+pull,?", [1] = "#a nc +protection,?", [2] = "#a de +protection,?", [3] = "#a react +protection,?"},
+            strategy = "protection",
+            tooltip = "Protection mode (tank)",
             index = 2
         },
-        ["aoe"] = {
-            icon = "warrior_aoe",
-            command = {[0] = "#a co ~aoe,?"},
+		["aoe"] = {
+            icon = "caster_aoe",
+            command = {[0] = "#a co ~aoe,?", [1] = "#a nc ~aoe,?"},
             strategy = "aoe",
             tooltip = "Use AOE abilities",
             index = 3
-        }
+        },
+        ["bdps"] = {
+            icon = "boost",
+            command = {[0] = "#a co ~buff,?", [1] = "#a nc ~buff,?"},
+            strategy = "buff",
+            tooltip = "Use buff abilities (cooldowns, trinkets, buffs)",
+            index = 4
+        },
     })
     
     y = y + 25
