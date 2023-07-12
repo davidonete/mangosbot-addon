@@ -1236,45 +1236,59 @@ function CreateSelectedBotPanel()
     CreateToolBar(frame, -y, "CLASS_DRUID", {
         ["bear"] = {
             icon = "bear",
-            command = {[0] = "#a co +bear,+pull,?"},
-            strategy = "bear",
-            tooltip = "Use bear form",
+            command = {[0] = "#a co +tank feral,+close,+pull,+tank assist,-ranged,-stealth,-behind,?", [1] = "#a nc +tank feral,-stealth,?", [2] = "#a de +tank feral,?", [3] = "#a react +protection,?"},
+            strategy = "tank feral",
+            tooltip = "Bear mode (tank)",
             index = 0
         },
         ["cat"] = {
             icon = "cat",
-            command = {[0] = "#a co +cat,-pull,?"},
-            strategy = "cat",
-            tooltip = "Use cat form",
+            command = {[0] = "#a co +dps feral,+dps assist,+close,+stealth,+behind,-ranged,-pull,?", [1] = "#a nc +dps feral,+stealth,?", [2] = "#a de +dps feral,?", [3] = "#a react +dps feral,?"},
+            strategy = "dps feral",
+            tooltip = "Cat mode (melee)",
             index = 1
         },
         ["caster"] = {
             icon = "caster",
-            command = {[0] = "#a co +caster,-pull,?"},
-            strategy = "caster",
-            tooltip = "Use caster form",
+            command = {[0] = "#a co +balance,+dps assist,+ranged,-close,-pull,-stealth,?", [1] = "#a nc +balance,-stealth,?", [2] = "#a de +balance,?", [3] = "#a react +balance,?"},
+            strategy = "balance",
+            tooltip = "Balance mode (caster)",
             index = 2
         },
         ["heal"] = {
             icon = "heal",
-            command = {[0] = "#a co +heal,-pull,?"},
-            strategy = "heal",
-            tooltip = "Healer mode",
+            command = {[0] = "#a co +restoration,+dps assist,+ranged,-close,-pull,-stealth,?", [1] = "#a nc +restoration,-stealth,?", [2] = "#a de +restoration,?", [3] = "#a react +restoration,?"},
+            strategy = "restoration",
+            tooltip = "Restoration mode (healer)",
             index = 3
+        },
+		["aoe"] = {
+            icon = "caster_aoe",
+            command = {[0] = "#a co ~aoe,?", [1] = "#a nc ~aoe,?"},
+            strategy = "aoe",
+            tooltip = "Use AOE abilities",
+            index = 4
+        },
+        ["bdps"] = {
+            icon = "boost",
+            command = {[0] = "#a co ~buff,?", [1] = "#a nc ~buff,?"},
+            strategy = "buff",
+            tooltip = "Use buff abilities (cooldowns, trinkets, buffs)",
+            index = 5
         },
         ["cure"] = {
             icon = "cure",
             command = {[0] = "#a co ~cure,?", [1] = "#a nc ~cure,?"},
             strategy = "cure",
-            tooltip = "Cure (poison, disease, etc.)",
-            index = 4
+            tooltip = "Use cure abilities (poisons and curses)",
+            index = 6
         },
-        ["melee"] = {
-            icon = "dps",
-            command = {[0] = "#a co ~melee,?"},
-            strategy = "melee",
-            tooltip = "Melee",
-            index = 5
+		["stealth"] = {
+            icon = "caster",
+            command = {[0] = "#a co ~stealth,?", [1] = "#a nc ~stealth,?"},
+            strategy = "stealth",
+            tooltip = "Use stealth abilities",
+            index = 7
         }
     })
     CreateToolBar(frame, -y, "CLASS_HUNTER", {
@@ -1375,7 +1389,7 @@ function CreateSelectedBotPanel()
         },
         ["holy"] = {
             icon = "heal",
-            command = {[0] = "#a co +holy,+ranged,-close,?", [1] = "#a nc +holy,?", [2] = "#a de +holy,?", [3] = "#a react +holy,?"},
+            command = {[0] = "#a co +holy,+ranged,-close,-pull,?", [1] = "#a nc +holy,?", [2] = "#a de +holy,?", [3] = "#a react +holy,?"},
             strategy = "holy",
             tooltip = "Holy mode (healer)",
             index = 2
