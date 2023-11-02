@@ -478,6 +478,14 @@ function CreateRtiToolBar(frame, y, name, group, x, spacing, register)
             tooltip = "Attack moon mark",
             index = 7,
             group = group
+        },
+		["rti_none"] = {
+            icon = "rti_cross",
+            command = {[0] = "rti none"},
+            rti = "none",
+            tooltip = "Ignore rti marks",
+            index = 8,
+            group = group
         }
     }, x, spacing, register)
 end
@@ -547,7 +555,15 @@ function CreateRtiCcToolBar(frame, y, name, group, x, spacing, register)
             tooltip = "CC moon mark",
             index = 7,
             group = group
-        }
+        },
+		["rti_none"] = {
+            icon = "cc_cross",
+            command = {[0] = "rti cc none"},
+            rti_cc = "none",
+            tooltip = "Ignore rti marks for CC",
+            index = 8,
+            group = group
+        },
     }, x, spacing, register)
 end
 
@@ -1273,22 +1289,36 @@ function CreateSelectedBotPanel()
             icon = "boost",
             command = {[0] = "#a co ~buff,?", [1] = "#a nc ~buff,?"},
             strategy = "buff",
-            tooltip = "Use buff abilities (cooldowns, trinkets, buffs)",
+            tooltip = "Use buff abilities",
             index = 5
+        },
+		["boost"] = {
+            icon = "boost",
+            command = {[0] = "#a co ~boost,?", [1] = "#a nc ~boost,?"},
+            strategy = "boost",
+            tooltip = "Use boost abilities (cooldowns, trinkets)",
+            index = 6
         },
         ["cure"] = {
             icon = "cure",
             command = {[0] = "#a co ~cure,?", [1] = "#a nc ~cure,?"},
             strategy = "cure",
             tooltip = "Use cure abilities (poisons and curses)",
-            index = 6
+            index = 7
+        },
+		["offheal"] = {
+            icon = "heal",
+            command = {[0] = "#a co ~offheal,?", [1] = "#a nc ~offheal,?"},
+            strategy = "offheal",
+            tooltip = "Use healing abilities to heal other party members",
+            index = 8
         },
 		["stealth"] = {
             icon = "caster",
             command = {[0] = "#a co ~stealth,?", [1] = "#a nc ~stealth,?"},
             strategy = "stealth",
             tooltip = "Use stealth abilities",
-            index = 7
+            index = 9
         }
     })
     CreateToolBar(frame, -y, "CLASS_HUNTER", {
@@ -1364,12 +1394,19 @@ function CreateSelectedBotPanel()
             tooltip = "Use buff abilities (cooldowns, trinkets, buffs)",
             index = 4
         },
+		["boost"] = {
+            icon = "boost",
+            command = {[0] = "#a co ~boost,?", [1] = "#a nc ~boost,?"},
+            strategy = "boost",
+            tooltip = "Use boost abilities (cooldowns, trinkets)",
+            index = 5
+        },
         ["cure"] = {
             icon = "cure",
             command = {[0] = "#a co ~cure,?", [1] = "#a nc ~cure,?"},
             strategy = "cure",
             tooltip = "Use cure abilities (curses)",
-            index = 5
+            index = 6
         }
     })
     CreateToolBar(frame, -y, "CLASS_PALADIN", {
@@ -1408,26 +1445,40 @@ function CreateSelectedBotPanel()
             tooltip = "Use buff abilities (cooldowns, trinkets, buffs)",
             index = 4
         },
+		["boost"] = {
+            icon = "boost",
+            command = {[0] = "#a co ~boost,?", [1] = "#a nc ~boost,?"},
+            strategy = "boost",
+            tooltip = "Use boost abilities (cooldowns, trinkets)",
+            index = 5
+        },
         ["cure"] = {
             icon = "cure",
             command = {[0] = "#a co ~cure,?", [1] = "#a nc ~cure,?"},
             strategy = "cure",
             tooltip = "Use cure abilities (curses)",
-            index = 5
+            index = 6
+        },
+		["offheal"] = {
+            icon = "heal",
+            command = {[0] = "#a co ~offheal,?", [1] = "#a nc ~offheal,?"},
+            strategy = "offheal",
+            tooltip = "Use healing abilities to heal other party members",
+            index = 7
         },
 		["aura"] = {
             icon = "bmana",
             command = {[0] = "#a co ~aura,?", [1] = "#a nc ~aura,?"},
             strategy = "aura",
             tooltip = "Auto pick aura",
-            index = 6
+            index = 8
         },
 		["blessing"] = {
             icon = "bspeed",
             command = {[0] = "#a co ~blessing,?", [1] = "#a nc ~blessing,?"},
             strategy = "blessing",
             tooltip = "Auto pick blessings",
-            index = 7
+            index = 9
         }
     })
     CreateToolBar(frame, -y, "CLASS_PRIEST", {
@@ -1517,19 +1568,26 @@ function CreateSelectedBotPanel()
             tooltip = "Use buff abilities (cooldowns, trinkets, buffs)",
             index = 4
         },
+		["boost"] = {
+            icon = "boost",
+            command = {[0] = "#a co ~boost,?", [1] = "#a nc ~boost,?"},
+            strategy = "boost",
+            tooltip = "Use boost abilities (cooldowns, trinkets)",
+            index = 5
+        },
 		["poisons"] = {
             icon = "caster_aoe",
             command = {[0] = "#a co ~poisons,?", [1] = "#a nc ~poisons,?"},
             strategy = "poisons",
             tooltip = "Auto pick poisons",
-            index = 5
+            index = 6
         },
 		["stealth"] = {
             icon = "caster",
             command = {[0] = "#a co ~stealth,?", [1] = "#a nc ~stealth,?"},
             strategy = "stealth",
             tooltip = "Use stealth abilities",
-            index = 6
+            index = 7
         }
     })
     CreateToolBar(frame, -y, "CLASS_SHAMAN", {
@@ -1568,19 +1626,33 @@ function CreateSelectedBotPanel()
             tooltip = "Use buff abilities (cooldowns, trinkets, buffs)",
             index = 4
         },
+		["boost"] = {
+            icon = "boost",
+            command = {[0] = "#a co ~boost,?", [1] = "#a nc ~boost,?"},
+            strategy = "boost",
+            tooltip = "Use boost abilities (cooldowns, trinkets)",
+            index = 5
+        },
         ["cure"] = {
             icon = "cure",
             command = {[0] = "#a co ~cure,?", [1] = "#a nc ~cure,?"},
             strategy = "cure",
             tooltip = "Use cure abilities (poison and disease)",
-            index = 5
+            index = 6
+        },
+		["offheal"] = {
+            icon = "heal",
+            command = {[0] = "#a co ~offheal,?", [1] = "#a nc ~offheal,?"},
+            strategy = "offheal",
+            tooltip = "Use healing abilities to heal other party members",
+            index = 7
         },
 		["totems"] = {
             icon = "totems",
             command = {[0] = "#a co ~totems,?", [1] = "#a nc ~totems,?"},
             strategy = "totems",
             tooltip = "Auto pick totems",
-            index = 6
+            index = 8
         }
     })
     CreateToolBar(frame, -y, "CLASS_WARLOCK", {
@@ -1619,19 +1691,26 @@ function CreateSelectedBotPanel()
             tooltip = "Use buff abilities (cooldowns, trinkets, buffs)",
             index = 4
         },
+		["boost"] = {
+            icon = "boost",
+            command = {[0] = "#a co ~boost,?", [1] = "#a nc ~boost,?"},
+            strategy = "boost",
+            tooltip = "Use boost abilities (cooldowns, trinkets)",
+            index = 5
+        },
         ["dps_debuff"] = {
             icon = "dps_debuff",
             command = {[0] = "#a co ~curse,?"},
             strategy = "curse",
             tooltip = "Auto pick curses",
-            index = 5
+            index = 6
         },
         ["pet"] = {
             icon = "pet",
             command = {[0] = "#a co ~pet,?", [1] = "#a nc ~pet,?"},
             strategy = "pet",
             tooltip = "Auto pick pets",
-            index = 6
+            index = 7
         }
     })
     CreateToolBar(frame, -y, "CLASS_WARRIOR", {
@@ -1669,6 +1748,13 @@ function CreateSelectedBotPanel()
             strategy = "buff",
             tooltip = "Use buff abilities (cooldowns, trinkets, buffs)",
             index = 4
+        },
+		["boost"] = {
+            icon = "boost",
+            command = {[0] = "#a co ~boost,?", [1] = "#a nc ~boost,?"},
+            strategy = "boost",
+            tooltip = "Use boost abilities (cooldowns, trinkets)",
+            index = 5
         },
     })
     
