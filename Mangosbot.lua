@@ -1325,41 +1325,48 @@ function CreateSelectedBotPanel()
         }
     })
     CreateToolBar(frame, -y, "CLASS_HUNTER", {
-        ["dps"] = {
-            icon = "dps",
-            command = {[0] = "#a co +dps,?"},
-            strategy = "dps",
-            tooltip = "DPS mode",
+	    ["bm"] = {
+            icon = "bear",
+            command = {[0] = "#a co +beast mastery,?", [1] = "#a nc +beast mastery,?", [2] = "#a de +beast mastery,?", [3] = "#a react +beast mastery,?"},
+            strategy = "beast mastery",
+            tooltip = "Beast mastery mode (dps)",
             index = 0
+        },
+        ["ms"] = {
+            icon = "dps",
+            command = {[0] = "#a co +marksmanship,?", [1] = "#a nc +marksmanship,?", [2] = "#a de +marksmanship,?", [3] = "#a react +marksmanship,?"},
+            strategy = "marksmanship",
+            tooltip = "Marksmanship mode (dps)",
+            index = 1
+        },
+        ["caster"] = {
+            icon = "caster",
+            command = {[0] = "#a co +survival,?", [1] = "#a nc +survival,?", [2] = "#a de +survival,?", [3] = "#a react +survival,?"},
+            strategy = "survival",
+            tooltip = "Survival mode (dps)",
+            index = 2
         },
         ["aoe"] = {
             icon = "aoe",
             command = {[0] = "#a co ~aoe,?"},
             strategy = "aoe",
             tooltip = "Use AOE abilities",
-            index = 1
-        },
-        ["bspeed"] = {
-            icon = "bspeed",
-            command = {[0] = "#a co ~bspeed,?", [1] = "#a nc ~bspeed,?"},
-            strategy = "bspeed",
-            tooltip = "Buff movement speed",
-            index = 2
-        },
-        ["bdps"] = {
-            icon = "bdps",
-            command = {[0] = "#a co ~bdps,?", [1] = "#a nc ~bdps,?"},
-            strategy = "bdps",
-            tooltip = "Buff DPS",
             index = 3
         },
-        ["pet"] = {
-            icon = "pet",
-            command = {[0] = "#a co ~pet,?", [1] = "#a nc ~pet,?"},
-            strategy = "pet",
-            tooltip = "Use pet",
+        ["bdps"] = {
+            icon = "boost",
+            command = {[0] = "#a co ~buff,?", [1] = "#a nc ~buff,?"},
+            strategy = "buff",
+            tooltip = "Use buff abilities",
             index = 4
-        }
+        },
+		["boost"] = {
+            icon = "boost",
+            command = {[0] = "#a co ~boost,?", [1] = "#a nc ~boost,?"},
+            strategy = "boost",
+            tooltip = "Use boost abilities (cooldowns, trinkets)",
+            index = 5
+        },
     })
     CreateToolBar(frame, -y, "CLASS_MAGE", {
         ["arcane"] = {
