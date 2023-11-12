@@ -1322,6 +1322,13 @@ function CreateSelectedBotPanel()
             strategy = "stealth",
             tooltip = "Use stealth abilities",
             index = 9
+        },
+		["preheal"] = {
+            icon = "heal",
+            command = {[0] = "#a co ~preheal,?"},
+            strategy = "preheal",
+            tooltip = "Heal the party before receiving melee damage",
+            index = 10
         }
     })
     CreateToolBar(frame, -y, "CLASS_HUNTER", {
@@ -1489,6 +1496,13 @@ function CreateSelectedBotPanel()
             strategy = "blessing",
             tooltip = "Auto pick blessings",
             index = 9
+        },
+		["preheal"] = {
+            icon = "heal",
+            command = {[0] = "#a co ~preheal,?"},
+            strategy = "preheal",
+            tooltip = "Heal the party before receiving melee damage",
+            index = 10
         }
     })
     CreateToolBar(frame, -y, "CLASS_PRIEST", {
@@ -1540,6 +1554,13 @@ function CreateSelectedBotPanel()
             strategy = "rshadow",
             tooltip = "Provide shadow resistance",
             index = 6
+        },
+		["preheal"] = {
+            icon = "heal",
+            command = {[0] = "#a co ~preheal,?"},
+            strategy = "preheal",
+            tooltip = "Heal the party before receiving melee damage",
+            index = 7
         }
     })
     CreateToolBar(frame, -y, "CLASS_ROGUE", {
@@ -1663,6 +1684,13 @@ function CreateSelectedBotPanel()
             strategy = "totems",
             tooltip = "Auto pick totems",
             index = 8
+        },
+		["preheal"] = {
+            icon = "heal",
+            command = {[0] = "#a co ~preheal,?"},
+            strategy = "preheal",
+            tooltip = "Heal the party before receiving melee damage",
+            index = 9
         }
     })
     CreateToolBar(frame, -y, "CLASS_WARLOCK", {
