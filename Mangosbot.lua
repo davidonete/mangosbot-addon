@@ -696,8 +696,8 @@ function CreateMovementToolBar(frame, y, name, group, x, spacing, register)
     tb["flee_passive"] = {
         icon = "flee_passive",
         command = {[0] = "#a flee ?"},
-        strategy = "",
-        tooltip = "Flee",
+        strategy = "passive",
+        tooltip = "Ignore everything and follow master",
         index = index,
         group = group,
         emote = "flee"
@@ -769,7 +769,7 @@ function CreateFormationToolBar(frame, y, name, group, x, spacing, register)
             icon = "formation_arrow",
             command = {[0] = "formation arrow"},
             formation = "arrow",
-            tooltip = "Tank first, dps last",
+            tooltip = "Tank first, dps/healer last",
             index = 2,
             group = group
         },
