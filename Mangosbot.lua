@@ -1336,7 +1336,7 @@ function CreateSelectedBotPanel()
         ["bear"] = {
             icon = "bear",
             icon_native = "ability_racial_bearform",
-            command = {[0] = "#a co +tank feral,+close,+pull,+tank assist,-ranged,-stealth,-behind,?", [1] = "#a nc +tank feral,+tank assist,-stealth,?", [2] = "#a de +tank feral,?", [3] = "#a react +protection,?"},
+            command = {[0] = "#a co +tank feral,+close,+pull,+tank assist,-ranged,-stealth,-behind,?", [1] = "#a nc +tank feral,+tank assist,-stealth,?", [2] = "#a de +tank feral,?", [3] = "#a react +tank feral,?"},
             strategy = "tank feral",
             tooltip = "Bear mode (tank)",
             index = 0
