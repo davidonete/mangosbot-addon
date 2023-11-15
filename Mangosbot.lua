@@ -2301,7 +2301,7 @@ function CreateSelectedBotPanel()
         },
 		["felguard"] = {
             icon = "pet",
-            --icon_native = "spell_shadow_summonfelguard",
+            icon_native = "spell_shadow_summonfelguard",
             command = {[0] = "#a co +pet felguard,?", [1] = "#a nc +pet felguard,?"},
             strategy = "pet felguard",
             tooltip = "Use Felguard",
