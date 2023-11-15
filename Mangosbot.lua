@@ -1265,14 +1265,14 @@ function CreateSelectedBotPanel()
             icon = "tank_assist",
             command = {[0] = "#a nc -dps assist,+tank assist,?", [1] = "#a co -dps assist,+tank assist,?"},
             strategy = "tank assist",
-            tooltip = "Grab all aggro",
+            tooltip = "Grab all aggro or attack Raid Mark",
             index = 0
         },
         ["dps_assist"] = {
             icon = "dps_assist",
             command = {[0] = "#a nc -tank assist,+dps assist,?", [1] = "#a co -tank assist,+dps assist,?"},
             strategy = "dps assist",
-            tooltip = "Assist others",
+            tooltip = "Attack least hp target or Raid Mark",
             index = 1
         },
         ["close"] = {
