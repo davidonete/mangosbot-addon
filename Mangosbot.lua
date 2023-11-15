@@ -5,11 +5,19 @@ Mangosbot_EventFrame:RegisterEvent("CHAT_MSG_ADDON")
 Mangosbot_EventFrame:RegisterEvent("CHAT_MSG_SYSTEM")
 Mangosbot_EventFrame:RegisterEvent("PARTY_MEMBERS_CHANGED")
 Mangosbot_EventFrame:RegisterEvent("UPDATE")
+Mangosbot_EventFrame:RegisterEvent("VARIABLES_LOADED")
 Mangosbot_EventFrame:Hide()
 
 local ToolBars = {}
 local GroupToolBars = {}
 local CommandSeparator = "\\\\"
+mangosbot_options = {}
+
+SLASH_BOTICONS1 = "/boticons"
+SlashCmdList.BOTICONS = function()
+    toggleIcons()
+end
+
 function SendBotCommand(text, chat, lang, channel)
     if (chat == "PARTY" and partySize() == 0) then return end
 	if (chat == "SAY") then
@@ -80,7 +88,13 @@ function CreateToolBar(frame, y, name, buttons, x, spacing, register)
         image:SetWidth(16)
         image:SetHeight(16)
         image.texture = image:CreateTexture(nil, "BACKGROUND")
-        local filename = "Interface\\Addons\\Mangosbot\\Images\\" .. button["icon"] .. ".tga"
+        local filename = "classic_temp"
+        if (button["icon"] ~= nil) then
+            filename = "Interface\\Addons\\Mangosbot\\Images\\" .. button["icon"] .. ".tga"
+        end
+        if (mangosbot_options.nativeIcons and button["icon_native"] ~= nil) then
+            filename = "Interface\\Icons\\" .. button["icon_native"]
+        end
         image.texture:SetTexture(filename)
         image.texture:SetAllPoints()
         btn.image = image
@@ -2373,7 +2387,7 @@ function UpdateBotDebugPanel(message, sender)
 end
 
 botTable = {}
-SelectedBotPanel = CreateSelectedBotPanel();
+SelectedBotPanel = {}
 BotRoster = CreateBotRoster();
 BotDebugPanel = CreateBotDebugPanel();
 CurrentBot = nil
@@ -2397,6 +2411,16 @@ function UpdateBotList(delay)
 end
 
 Mangosbot_EventFrame:SetScript("OnEvent", function(self)
+    if (event == "VARIABLES_LOADED") then
+        if (not mangosbot_options) then
+            mangosbot_options = {}
+        end
+        if (not mangosbot_options.nativeIcons) then
+            mangosbot_options.nativeIcons = true
+        end
+        SelectedBotPanel = CreateSelectedBotPanel();
+    end
+
     if (event == "PLAYER_TARGET_CHANGED") then
         local name = GetUnitName("target")
         local self = GetUnitName("player")
