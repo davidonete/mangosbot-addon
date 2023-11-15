@@ -8,9 +8,14 @@ Mangosbot_EventFrame:RegisterEvent("UPDATE")
 Mangosbot_EventFrame:RegisterEvent("VARIABLES_LOADED")
 Mangosbot_EventFrame:Hide()
 
+function print(s)
+    if (s ~= nil) then DEFAULT_CHAT_FRAME:AddMessage(s); else DEFAULT_CHAT_FRAME:AddMessage("nil"); end
+end
+
 local ToolBars = {}
 local GroupToolBars = {}
 local CommandSeparator = "\\\\"
+local DropDownMenu_Current = {}
 mangosbot_options = {}
 
 local function toggleIcons()
@@ -278,7 +283,7 @@ end
 function CreateBotRoster()
     local frame = CreateFrame("Frame", "BotRoster", UIParent)
     frame:Hide()
-    frame:SetWidth(170)
+    frame:SetWidth(186)
     frame:SetHeight(175)
     frame:SetPoint("CENTER", UIParent, "CENTER")
     frame:EnableMouse(true)
@@ -299,7 +304,7 @@ function CreateBotRoster()
     for i = 1,10 do
         local item = CreateFrame("Frame", "BotRoster_Item" .. i, frame)
         item:SetPoint("TOPLEFT", frame, "TOPLEFT", i * 100, 0)
-        item:SetWidth(96)
+        item:SetWidth(112)
         item:SetHeight(40)
         item:SetBackdropColor(0,0,0,1)
         item:SetBackdrop({
@@ -379,7 +384,14 @@ function CreateBotRoster()
                 tooltip = "Summon at meeting stone",
                 strategy = "",
                 index = 3
-            }
+            },
+            ["menu"] = {
+                icon = "menu",
+                command = {[0] = ""},
+                tooltip = "More...",
+                strategy = "",
+                index = 4
+            }   
         }, 20, 0, false)
         local tb = item.toolbar["quickbar"..i]
         tb:SetBackdropBorderColor(0,0,0,0.0)
@@ -389,6 +401,7 @@ function CreateBotRoster()
         tb.buttons["leave"]:SetPoint("TOPLEFT", tb, "TOPLEFT", 16, 0)
         tb.buttons["whisper"]:SetPoint("TOPLEFT", tb, "TOPLEFT", 48, 0)
         tb.buttons["summon"]:SetPoint("TOPLEFT", tb, "TOPLEFT", 32, 0)
+        tb.buttons["menu"]:SetPoint("TOPLEFT", tb, "TOPLEFT", 64, 0)
 
         item:Hide()
         frame.items[i] = item
@@ -720,6 +733,16 @@ function CreateMovementToolBar(frame, y, name, group, x, spacing, register)
         }
         index = index + 1
     end
+
+    tb["menu"] = {
+            icon = "menu",
+            command = {[0] = ""},
+            strategy = "",
+            tooltip = "More...",
+            handler = OpenDropDownMenuForCurrentBot,
+            index = index
+        }
+        index = index + 1
 
     return CreateToolBar(frame, -y, name, tb, x, spacing, register)
 end
@@ -2488,10 +2511,111 @@ function UpdateBotDebugPanel(message, sender)
     end
 end
 
+function createDropdown(opts)
+    local dropdown_name = opts['name'] .. '_dropdown'
+    local menu_items = opts['items'] or {}
+    local title_text = opts['title'] or ''
+    local dropdown_width = 0
+    local default_val = opts['defaultVal'] or ''
+    local change_func = opts['changeFunc'] or function (dropdown_val) end
+    local dropdown = CreateFrame("Frame", dropdown_name, opts['prnt'], "UIDropDownMenuTemplate")
+
+    local dd_title = dropdown:CreateFontString(dropdown, 'OVERLAY', 'GameFontNormal')
+    dd_title:SetPoint("TOPLEFT", 20, 10)
+
+    for _, item in pairs(menu_items) do -- Sets the dropdown width to the largest item string width.
+        dd_title:SetText(item)
+        local text_width = dd_title:GetStringWidth() + 20
+        if text_width > dropdown_width then
+            dropdown_width = text_width
+        end
+    end
+
+    dropdown:SetWidth(dropdown_width)
+    getglobal(dropdown:GetName().."Text"):SetText(default_val)
+    dd_title:SetText(title_text)
+    dd_title:Hide()
+    dropdown:Hide()
+
+    UIDropDownMenu_Initialize(dropdown, function(self, level, _)
+        local info = {}
+        for key, val in pairs(menu_items) do
+            info.text = val .. "...";
+            info.checked = false
+            info.menuList= key
+            info.hasArrow = false
+            info.justifyH = "LEFT"
+            info.func = change_func
+            UIDropDownMenu_AddButton(info)
+        end
+    end, "MENU")
+
+    return dropdown
+end
+
+local MenuForBot = nil
+BotMenuItems_Current = {
+    [1] = "Accept quests",
+    [2] = "Talk to quest giver",
+    [3] = "Choose quest reward [item]",
+    [4] = "Show taxi paths",
+    [5] = "Bind to innkeeper",
+    [6] = "Learn from trainer",
+    [7] = "Send me an [item]",
+    [8] = "Toggle loot +/-[item]",
+    [9] = "Toggle +/-[spell]",
+    [10] = "Make me party leader",
+}
+BotMenuCommands_Current = {
+    [1] = "accept *",
+    [2] = "d talk to quest giver",
+    [3] = "r ",
+    [4] = "taxi ?",
+    [5] = "home",
+    [6] = "trainer learn",
+    [7] = "sendmail ",
+    [8] = "ll ",
+    [9] = "ss ",
+    [10] = "give leader",
+}
+function CreateDropDownMenu(menu_name, menu_title, menu_items, menu_commands, parent)
+    local opts = {
+        ['name']=menu_name,
+        ['prnt']=parent,
+        ['title']=menu_title,
+        ['items']=menu_items,
+        ['defaultVal']='', 
+        ['changeFunc']=function()
+            local editBox = getglobal("ChatFrameEditBox")
+            local id = this:GetID()
+            editBox:Show()
+            editBox:SetFocus()
+            editBox:SetText("/w " .. MenuForBot .. " " .. menu_commands[id])
+        end
+    }
+    local menu = createDropdown(opts)
+    HideDropDownMenu(1)
+    return menu
+end
+
+function OpenDropDownMenuForCurrentBot()
+    local name = GetUnitName("target")
+    if (name == nil) then name = CurrentBot end
+    OpenDropDownMenu(DropDownMenu_Current, name)
+end
+
+function OpenDropDownMenu(dropDownMenu, bot)
+    local scale,x,y=BotRoster:GetEffectiveScale(),GetCursorPosition();
+    dropDownMenu:SetPoint("CENTER",nil,"BOTTOMLEFT",x/scale,y/scale);
+    MenuForBot = bot
+    ToggleDropDownMenu(1, nil, dropDownMenu, 'cursor')
+end
+
 botTable = {}
 SelectedBotPanel = {}
 BotRoster = CreateBotRoster();
 BotDebugPanel = CreateBotDebugPanel();
+DropDownMenu_Current = CreateDropDownMenu("more", "More", BotMenuItems_Current, BotMenuCommands_Current, BotRoster)
 CurrentBot = nil
 LastBot = nil
 BotDebugFilter = ""
@@ -2604,11 +2728,14 @@ Mangosbot_EventFrame:SetScript("OnEvent", function(self)
                 whisperBtn:Hide()
                 local summonBtn = item.toolbar["quickbar"..index].buttons["summon"]
                 summonBtn:Hide()
+                local menuBtn = item.toolbar["quickbar"..index].buttons["menu"]
+                menuBtn:Hide()
                 if (bot["online"]) then
                     item:SetBackdropBorderColor(0.6, 0.6, 0.2, 1.0)
                     logoutBtn:Show()
                     whisperBtn:Show()
                     summonBtn:Show()
+                    menuBtn:Show()
                     local inParty = false
                     for i = 1,5 do
                         if (partyName(i) == key) then
@@ -2655,7 +2782,10 @@ Mangosbot_EventFrame:SetScript("OnEvent", function(self)
                 summonBtn:SetScript("OnClick", function()
                     SendBotCommand("summon", "WHISPER", nil, summonBtn["key"])
                 end)
-
+                menuBtn["key"] = key
+                menuBtn:SetScript("OnClick", function()
+                    OpenDropDownMenu(menuBtn["key"])
+                end)
 
                 item:Show()
 
@@ -3187,10 +3317,6 @@ function wait(delay, func, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9)
   end
   tinsert(waitTable,{delay,func,{arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9}});
   return true;
-end
-
-function print(s)
-    if (s ~= nil) then DEFAULT_CHAT_FRAME:AddMessage(s); else DEFAULT_CHAT_FRAME:AddMessage("nil"); end
 end
 
 function partyName(i)
