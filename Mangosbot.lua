@@ -1649,8 +1649,8 @@ function CreateSelectedBotPanel()
         },
         ["rshadow"] = {
             icon = "rshadow",
-            command = {[0] = "#a co ~rshadow,?", [1] = "#a nc ~rshadow,?"},
             icon_native = "spell_shadow_antishadow",
+            command = {[0] = "#a nc ~rshadow,?"},
             strategy = "rshadow",
             tooltip = "Provide shadow resistance",
             index = 6
