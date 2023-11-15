@@ -13,6 +13,31 @@ local GroupToolBars = {}
 local CommandSeparator = "\\\\"
 mangosbot_options = {}
 
+local function toggleIcons()
+    if (mangosbot_options.nativeIcons == true) then
+        mangosbot_options.nativeIcons = false
+        DEFAULT_CHAT_FRAME:AddMessage('Mangosbot: Native icons disabled')
+    else
+        mangosbot_options.nativeIcons = true
+        DEFAULT_CHAT_FRAME:AddMessage('Mangosbot: Native icons enabled')
+    end
+    local isVisible = SelectedBotPanel:IsVisible()
+    SelectedBotPanel:Hide()
+    SelectedBotPanel = {}
+    SelectedBotPanel = CreateSelectedBotPanel();
+    if (isVisible) then
+        local name = GetUnitName("target")
+        local self = GetUnitName("player")
+        if (CurrentBot == nil and (name == nil or not UnitExists("target") or UnitIsEnemy("target", "player") or not UnitIsPlayer("target"))) then
+            -- SelectedBotPanel:Hide()
+        else
+            -- SelectedBotPanel:Show()
+            QuerySelectedBot(name)
+        end
+
+    end
+end
+
 SLASH_BOTICONS1 = "/boticons"
 SlashCmdList.BOTICONS = function()
     toggleIcons()
