@@ -1015,7 +1015,7 @@ function CreateSelectedBotPanel()
             icon = "stats",
             command = {[0] = "stats"},
             strategy = "",
-            tooltip = "Tell stats (XP, money, etc.)",
+            tooltip = "Tell stats (XP, bag space, money, durability)",
             index = 0
         },
         ["whisper"] = {
@@ -1033,33 +1033,47 @@ function CreateSelectedBotPanel()
             tooltip = "Loot everything",
             index = 2
         },
+        ["talk"] = {
+            icon = "talk",
+            command = {[0] = "talk", [1] = "accept *"},
+            strategy = "",
+            tooltip = "Talk to nearby NPCs to complete or accept quests",
+            index = 3
+        },
         ["set_guard"] = {
             icon = "set_guard",
             command = {[0] = "position guard set"},
             strategy = "",
             tooltip = "Set guard position",
-            index = 3
+            index = 4
         },
         ["release"] = {
             icon = "release",
             command = {[0] = "release"},
             strategy = "",
             tooltip = "Release spirit",
-            index = 4
+            index = 5
         },
         ["revive"] = {
             icon = "revive",
             command = {[0] = "revive", [1] = "d revive from corpse"},
             strategy = "",
             tooltip = "Revive at Spirit Healer",
-            index = 5
-        },
-        ["talk"] = {
-            icon = "talk",
-            command = {[0] = "talk", [1] = "accept *"},
-            strategy = "",
-            tooltip = "Talk",
             index = 6
+        },
+        ["sell"] = {
+            icon = "sell",
+            command = {[0] = "s *"},
+            strategy = "",
+            tooltip = "Sell grey items",
+            index = 7
+        },
+        ["repair"] = {
+            icon = "repair",
+            command = {[0] = "repair"},
+            strategy = "",
+            tooltip = "Repair items",
+            index = 8
         }
     })
 
