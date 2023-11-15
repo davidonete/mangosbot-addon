@@ -1335,32 +1335,32 @@ function CreateSelectedBotPanel()
     CreateToolBar(frame, -y, "CLASS_DRUID", {
         ["bear"] = {
             icon = "bear",
-            command = {[0] = "#a co +tank feral,+close,+pull,+tank assist,-ranged,-stealth,-behind,?", [1] = "#a nc +tank feral,-stealth,?", [2] = "#a de +tank feral,?", [3] = "#a react +protection,?"},
             icon_native = "ability_racial_bearform",
+            command = {[0] = "#a co +tank feral,+close,+pull,+tank assist,-ranged,-stealth,-behind,?", [1] = "#a nc +tank feral,+tank assist,-stealth,?", [2] = "#a de +tank feral,?", [3] = "#a react +protection,?"},
             strategy = "tank feral",
             tooltip = "Bear mode (tank)",
             index = 0
         },
         ["cat"] = {
             icon = "cat",
-            command = {[0] = "#a co +dps feral,+dps assist,+close,+stealth,+behind,-ranged,-pull,?", [1] = "#a nc +dps feral,+stealth,?", [2] = "#a de +dps feral,?", [3] = "#a react +dps feral,?"},
             icon_native = "ability_druid_catform",
+            command = {[0] = "#a co +dps feral,+dps assist,+close,+stealth,+behind,-ranged,-pull,?", [1] = "#a nc +dps feral,+dps assist,+stealth,?", [2] = "#a de +dps feral,?", [3] = "#a react +dps feral,?"},
             strategy = "dps feral",
             tooltip = "Cat mode (melee)",
             index = 1
         },
         ["caster"] = {
             icon = "caster",
-            command = {[0] = "#a co +balance,+dps assist,+ranged,-close,-pull,-stealth,?", [1] = "#a nc +balance,-stealth,?", [2] = "#a de +balance,?", [3] = "#a react +balance,?"},
             icon_native = "spell_nature_starfall",
+            command = {[0] = "#a co +balance,+dps assist,+ranged,-close,-pull,-stealth,?", [1] = "#a nc +balance,+dps assist,-stealth,?", [2] = "#a de +balance,?", [3] = "#a react +balance,?"},
             strategy = "balance",
             tooltip = "Balance mode (caster)",
             index = 2
         },
         ["heal"] = {
             icon = "heal",
-            command = {[0] = "#a co +restoration,+dps assist,+ranged,-close,-pull,-stealth,?", [1] = "#a nc +restoration,-stealth,?", [2] = "#a de +restoration,?", [3] = "#a react +restoration,?"},
             icon_native = "spell_nature_healingtouch",
+            command = {[0] = "#a co +restoration,+dps assist,+ranged,-close,-pull,-stealth,?", [1] = "#a nc +restoration,+dps assist,-stealth,?", [2] = "#a de +restoration,?", [3] = "#a react +restoration,?"},
             strategy = "restoration",
             tooltip = "Restoration mode (healer)",
             index = 3
@@ -1520,24 +1520,24 @@ function CreateSelectedBotPanel()
     CreateToolBar(frame, -y, "CLASS_PALADIN", {
         ["retribution"] = {
             icon = "dps",
-            command = {[0] = "#a co +retribution,+dps assist,+close,-ranged,-pull,?", [1] = "#a nc +retribution,?", [2] = "#a de +retribution,?", [3] = "#a react +retribution,?"},
             icon_native = "spell_holy_auraoflight",
+            command = {[0] = "#a co +retribution,+dps assist,+close,-ranged,-pull,?", [1] = "#a nc +retribution,+dps assist,?", [2] = "#a de +retribution,?", [3] = "#a react +retribution,?"},
             strategy = "retribution",
             tooltip = "Retribution mode (melee)",
             index = 0
         },
         ["protection"] = {
             icon = "tank",
-            command = {[0] = "#a co +protection,+close,+pull,+tank assist,-ranged,?", [1] = "#a nc +protection,?", [2] = "#a de +protection,?", [3] = "#a react +protection,?"},
             icon_native = "spell_holy_devotionaura",
+            command = {[0] = "#a co +protection,+close,+pull,+tank assist,-ranged,?", [1] = "#a nc +protection,+tank assist,?", [2] = "#a de +protection,?", [3] = "#a react +protection,?"},
             strategy = "protection",
             tooltip = "Protection mode (tank)",
             index = 1
         },
         ["holy"] = {
             icon = "heal",
-            command = {[0] = "#a co +holy,+ranged,-close,-pull,?", [1] = "#a nc +holy,?", [2] = "#a de +holy,?", [3] = "#a react +holy,?"},
             icon_native = "spell_holy_holybolt",
+            command = {[0] = "#a co +holy,+ranged,+dps assist,-close,-pull,?", [1] = "#a nc +holy,+dps assist,?", [2] = "#a de +holy,?", [3] = "#a react +holy,?"},
             strategy = "holy",
             tooltip = "Holy mode (healer)",
             index = 2
@@ -1867,24 +1867,24 @@ function CreateSelectedBotPanel()
     CreateToolBar(frame, -y, "CLASS_WARRIOR", {
         ["arms"] = {
             icon = "dps",
-            command = {[0] = "#a co +arms,+dps assist,-pull,?", [1] = "#a nc +arms,?", [2] = "#a de +arms,?", [3] = "#a react +arms,?"},
             icon_native = "ability_rogue_eviscerate",
+            command = {[0] = "#a co +arms,+dps assist,-pull,?", [1] = "#a nc +arms,+dps assist,?", [2] = "#a de +arms,?", [3] = "#a react +arms,?"},
             strategy = "arms",
             tooltip = "Arms mode (melee)",
             index = 0
         },
         ["fury"] = {
             icon = "grind",
-            command = {[0] = "#a co +fury,+dps assist,-pull,?", [1] = "#a nc +fury,?", [2] = "#a de +fury,?", [3] = "#a react +fury,?"},
             icon_native = "ability_warrior_innerrage",
+            command = {[0] = "#a co +fury,+dps assist,-pull,?", [1] = "#a nc +fury,+dps assist,?", [2] = "#a de +fury,?", [3] = "#a react +fury,?"},
             strategy = "fury",
             tooltip = "Fury mode (melee)",
             index = 1
         },
         ["protection"] = {
             icon = "tank",
-            command = {[0] = "#a co +protection,+tank assist,+pull,?", [1] = "#a nc +protection,?", [2] = "#a de +protection,?", [3] = "#a react +protection,?"},
             icon_native = "inv_shield_06",
+            command = {[0] = "#a co +protection,+tank assist,+pull,?", [1] = "#a nc +protection,+tank assist,?", [2] = "#a de +protection,?", [3] = "#a react +protection,?"},
             strategy = "protection",
             tooltip = "Protection mode (tank)",
             index = 2
