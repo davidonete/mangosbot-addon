@@ -953,7 +953,7 @@ function StartChat()
     editBox:SetFocus()
     local name = GetUnitName("target")
     if (name == nil) then name = CurrentBot end
-    editBox:SetText("/w " .. name .. " ")
+    editBox:SetText("/whisper " .. name .. " ")
 end
 
 function CreateSelectedBotPanel()
@@ -1455,6 +1455,22 @@ function CreateSelectedBotPanel()
             tooltip = "Use boost abilities (cooldowns, trinkets)",
             index = 5
         },
+		["stings"] = {
+            icon = "dps_debuff",
+			icon_native = "trade_brewpoison",
+            command = {[0] = "#a co ~sting,?"},
+            strategy = "sting",
+            tooltip = "Auto pick stings",
+            index = 6
+        },
+		["aspects"] = {
+            icon = "arcane",
+			icon_native = "spell_nature_ravenform",
+            command = {[0] = "#a co ~aspect,?", [1] = "#a nc ~aspect,?"},
+            strategy = "aspect",
+            tooltip = "Auto pick aspects",
+            index = 7
+        },
     })
     CreateToolBar(frame, -y, "CLASS_MAGE", {
         ["arcane"] = {
@@ -1843,6 +1859,7 @@ function CreateSelectedBotPanel()
         },
         ["dps_debuff"] = {
             icon = "dps_debuff",
+			icon_native = "spell_shadow_curseofsargeras",
             command = {[0] = "#a co ~curse,?"},
             strategy = "curse",
             tooltip = "Auto pick curses",
@@ -2105,6 +2122,32 @@ function CreateSelectedBotPanel()
             index = 6
         }
 	})
+	CreateToolBar(frame, -y, "CLASS_HUNTER_STINGS", {
+		["serpent"] = {
+            icon = "caster_aoe",
+            icon_native = "ability_hunter_quickshot",
+            command = {[0] = "#a co +sting serpent,?"},
+            strategy = "sting serpent",
+            tooltip = "Serpent Sting",
+            index = 0
+        },
+		["viper"] = {
+            icon = "caster_aoe",
+            icon_native = "ability_hunter_aimedshot",
+            command = {[0] = "#a co +sting viper,?"},
+            strategy = "sting viper",
+            tooltip = "Viper Sting",
+            index = 1
+        },
+		["scorpid"] = {
+            icon = "caster_aoe",
+            icon_native = "ability_hunter_criticalshot",
+            command = {[0] = "#a co +sting scorpid,?"},
+            strategy = "sting scorpid",
+            tooltip = "Scorpid Sting",
+            index = 2
+        }
+	})
     
     y = y + 25
     CreateToolBar(frame, -y, "CLASS_PALADIN_AURA", {
@@ -2299,6 +2342,72 @@ function CreateSelectedBotPanel()
             strategy = "pet felguard",
             tooltip = "Use Felguard",
             index = 4
+        }
+	})
+		CreateToolBar(frame, -y, "CLASS_HUNTER_ASPECTS", {
+		["hawk"] = {
+            icon = "totems",
+            icon_native = "spell_nature_ravenform",
+            command = {[0] = "#a co +aspect hawk,?", [1] = "#a nc +aspect hawk,?"},
+            strategy = "aspect hawk",
+            tooltip = "Aspect of the Hawk",
+            index = 0
+        },
+		["monkey"] = {
+            icon = "totems",
+            icon_native = "ability_hunter_aspectofthemonkey",
+            command = {[0] = "#a co +aspect monkey,?", [1] = "#a nc +aspect monkey,?"},
+            strategy = "aspect monkey",
+            tooltip = "Aspect of the Monkey",
+            index = 1
+        },
+		["cheetah"] = {
+            icon = "totems",
+            icon_native = "ability_mount_jungletiger",
+            command = {[0] = "#a co +aspect cheetah,?", [1] = "#a nc +aspect cheetah,?"},
+            strategy = "aspect cheetah",
+            tooltip = "Aspect of the Cheetah",
+            index = 2
+        },
+		["pack"] = {
+            icon = "totems",
+            icon_native = "ability_mount_whitetiger",
+            command = {[0] = "#a co +aspect pack,?", [1] = "#a nc +aspect pack,?"},
+            strategy = "aspect pack",
+            tooltip = "Aspect of the Pack",
+            index = 3
+        },
+		["beast"] = {
+            icon = "totems",
+            icon_native = "ability_mount_pinktiger",
+            command = {[0] = "#a co +aspect beast,?", [1] = "#a nc +aspect beast,?"},
+            strategy = "aspect beast",
+            tooltip = "Aspect of the Beast",
+            index = 4
+        },
+		["wild"] = {
+            icon = "totems",
+            icon_native = "spell_nature_protectionformnature",
+            command = {[0] = "#a co +aspect wild,?", [1] = "#a nc +aspect wild,?"},
+            strategy = "aspect wild",
+            tooltip = "Aspect of the Wild",
+            index = 5
+        },
+		["viper"] = {
+            icon = "totems",
+            icon_native = " ability_hunter_aspectoftheviper",
+            command = {[0] = "#a co +aspect viper,?", [1] = "#a nc +aspect viper,?"},
+            strategy = "aspect viper",
+            tooltip = "Aspect of the Viper",
+            index = 6
+        },
+		["dragonhawk"] = {
+            icon = "totems",
+            icon_native = " ability_hunter_pet_dragonhawk",
+            command = {[0] = "#a co +aspect dragonhawk,?", [1] = "#a nc +aspect dragonhawk,?"},
+            strategy = "aspect dragonhawk",
+            tooltip = "Aspect of the Dragonhawk",
+            index = 7
         }
 	})
 	
@@ -2597,7 +2706,7 @@ function CreateDropDownMenu(menu_name, menu_title, menu_items, menu_commands, pa
             local id = this:GetID()
             editBox:Show()
             editBox:SetFocus()
-            editBox:SetText("/w " .. MenuForBot .. " " .. menu_commands[id])
+            editBox:SetText("/whisper " .. MenuForBot .. " " .. menu_commands[id])
         end
     }
     local menu = createDropdown(opts)
@@ -2783,7 +2892,7 @@ Mangosbot_EventFrame:SetScript("OnEvent", function(self)
                     local editBox = getglobal("ChatFrameEditBox")
                     editBox:Show()
                     editBox:SetFocus()
-                    editBox:SetText("/w " .. whisperBtn["key"] .. " ")
+                    editBox:SetText("/whisper " .. whisperBtn["key"] .. " ")
                 end)
                 summonBtn["key"] = key
                 summonBtn:SetScript("OnClick", function()
