@@ -1471,6 +1471,14 @@ function CreateSelectedBotPanel()
             tooltip = "Auto pick aspects",
             index = 7
         },
+        ["pet"] = {
+            icon = "pet",
+            icon_native = "ability_hunter_pet_cat",
+            command = {[0] = "#a co ~pet,?", [1] = "#a nc ~pet,?"},
+            strategy = "pet",
+            tooltip = "Use pet",
+            index = 8
+        }
     })
     CreateToolBar(frame, -y, "CLASS_MAGE", {
         ["arcane"] = {
