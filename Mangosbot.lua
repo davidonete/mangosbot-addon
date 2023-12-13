@@ -2933,7 +2933,7 @@ Mangosbot_EventFrame:SetScript("OnEvent", function(self)
                 y = y + (5 + height)
             end
             
-            if (GetNumRaidMembers() > 10) then 
+            if (botCount() >= 10) then 
                 y = 230
             end
                         
@@ -3462,6 +3462,12 @@ function partySize()
     local r = GetNumRaidMembers()
     if (r == 0) then return p end
     return r
+end
+
+function botCount()
+  local count = 0
+  for _ in pairs(botTable) do count = count + 1 end
+  return count
 end
 
 print("MangosBOT Addon is loaded");
