@@ -2680,15 +2680,6 @@ function createDropdown(opts)
             info.func = change_func
             UIDropDownMenu_AddButton(info)
         end
-        --[[for key, val in pairs(menu_items) do
-            info.text = val .. "...";
-            info.checked = false
-            info.menuList= key
-            info.hasArrow = false
-            info.justifyH = "LEFT"
-            info.func = change_func
-            UIDropDownMenu_AddButton(info)
-        end--]]
     end, "MENU")
 
     return dropdown
@@ -2727,8 +2718,6 @@ function CreateDropDownMenu(menu_name, menu_title, menu_items, menu_commands, pa
         ['items']=menu_items,
         ['defaultVal']='', 
         ['changeFunc']=function()
-            local id = this:GetID()
-            --SendBotCommand(menu_commands[id], "WHISPER", nil, MenuForBot)
             local editBox = DEFAULT_CHAT_FRAME.editBox--getglobal("ChatFrame1EditBox")
             local id = this:GetID()
             editBox:Show()
