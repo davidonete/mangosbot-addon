@@ -2718,7 +2718,7 @@ function CreateDropDownMenu(menu_name, menu_title, menu_items, menu_commands, pa
         ['items']=menu_items,
         ['defaultVal']='', 
         ['changeFunc']=function()
-            local editBox = DEFAULT_CHAT_FRAME.editBox--getglobal("ChatFrame1EditBox")
+            local editBox = getglobal("ChatFrame1EditBox")
             local id = this:GetID()
             editBox:Show()
             editBox:SetFocus()
