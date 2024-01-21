@@ -948,7 +948,7 @@ function CreateSaveManaToolBar(frame, y, name, group, x, spacing, register)
 end
 
 function StartChat()
-    local editBox = getglobal("ChatFrameEditBox")
+    local editBox = getglobal("ChatFrame1EditBox")
     editBox:Show()
     editBox:SetFocus()
     local name = GetUnitName("target")
@@ -2670,7 +2670,17 @@ function createDropdown(opts)
 
     UIDropDownMenu_Initialize(dropdown, function(self, level, _)
         local info = {}
-        for key, val in pairs(menu_items) do
+        for i = 1, table.getn(menu_items) do
+            info = {}
+            info.text = menu_items[i] .. "..."
+            info.checked = false
+            info.menuList= i
+            info.hasArrow = false
+            info.justifyH = "LEFT"
+            info.func = change_func
+            UIDropDownMenu_AddButton(info)
+        end
+        --[[for key, val in pairs(menu_items) do
             info.text = val .. "...";
             info.checked = false
             info.menuList= key
@@ -2678,7 +2688,7 @@ function createDropdown(opts)
             info.justifyH = "LEFT"
             info.func = change_func
             UIDropDownMenu_AddButton(info)
-        end
+        end--]]
     end, "MENU")
 
     return dropdown
@@ -2717,7 +2727,9 @@ function CreateDropDownMenu(menu_name, menu_title, menu_items, menu_commands, pa
         ['items']=menu_items,
         ['defaultVal']='', 
         ['changeFunc']=function()
-            local editBox = getglobal("ChatFrameEditBox")
+            local id = this:GetID()
+            --SendBotCommand(menu_commands[id], "WHISPER", nil, MenuForBot)
+            local editBox = DEFAULT_CHAT_FRAME.editBox--getglobal("ChatFrame1EditBox")
             local id = this:GetID()
             editBox:Show()
             editBox:SetFocus()
@@ -2904,7 +2916,7 @@ Mangosbot_EventFrame:SetScript("OnEvent", function(self)
                 end)
                 whisperBtn["key"] = key
                 whisperBtn:SetScript("OnClick", function()
-                    local editBox = getglobal("ChatFrameEditBox")
+                    local editBox = getglobal("ChatFrame1EditBox")
                     editBox:Show()
                     editBox:SetFocus()
                     editBox:SetText("/whisper " .. whisperBtn["key"] .. " ")
@@ -3400,6 +3412,16 @@ function SlashCmdList.MANGOSBOT(msg, editbox) -- 4.
             SendBotCommand(".bot list", "SAY")
             QueryBotParty()
         end
+    end
+    -- allow show or hide BotRoster independently
+    if (msg == "roster show") then
+        BotRoster.ShowRequest = true
+        SendBotCommand(".bot list", "SAY")
+        QueryBotParty()
+        BotRoster:Show()
+    end
+    if (msg == "roster hide") then
+        BotRoster:Hide()
     end
     if (string.find(msg, "debug")) then
         local cmd = string.sub(msg, 7)
