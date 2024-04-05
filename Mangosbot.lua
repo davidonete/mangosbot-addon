@@ -1390,7 +1390,7 @@ function CreateSelectedBotPanel()
             icon = "heal",
             command = {[0] = "#a co ~offheal,?", [1] = "#a nc ~offheal,?"},
             strategy = "offheal",
-            tooltip = "Use healing abilities to heal other party members",
+            tooltip = "Use healing abilities to heal other party members while being in dps mode",
             index = 8
         },
 		["stealth"] = {
@@ -1591,7 +1591,7 @@ function CreateSelectedBotPanel()
             icon = "heal",
             command = {[0] = "#a co ~offheal,?", [1] = "#a nc ~offheal,?"},
             strategy = "offheal",
-            tooltip = "Use healing abilities to heal other party members",
+            tooltip = "Use healing abilities to heal other party members while being in dps mode",
             index = 7
         },
 		["aura"] = {
@@ -1619,65 +1619,78 @@ function CreateSelectedBotPanel()
         }
     })
     CreateToolBar(frame, -y, "CLASS_PRIEST", {
-        ["heal"] = {
+        ["discipline"] = {
             icon = "heal",
-            icon_native = "spell_holy_holybolt",
-            command = {[0] = "#a co +heal,?"},
-            strategy = "heal",
-            tooltip = "Healer mode",
+            icon_native = "spell_holy_wordfortitude",
+            command = {[0] = "#a co +discipline,?", [1] = "#a nc +discipline,?", [2] = "#a de +discipline,?", [3] = "#a react +discipline,?"},
+            strategy = "discipline",
+            tooltip = "Discipline mode (healer)",
             index = 0
         },
         ["holy"] = {
             icon = "holy",
-            icon_native = "spell_holy_wordfortitude",
-            command = {[0] = "#a co +holy,?"},
+            icon_native = "spell_holy_holybolt",
+            command = {[0] = "#a co +holy,?", [1] = "#a nc +holy,?", [2] = "#a de +holy,?", [3] = "#a react +holy,?"},
             strategy = "holy",
-            tooltip = "Use holy spells",
+            tooltip = "Holy mode (healer)",
             index = 1
         },
         ["shadow"] = {
             icon = "shadow",
             icon_native = "spell_shadow_shadowwordpain",
-            command = {[0] = "#a co +shadow,?"},
+            command = {[0] = "#a co +shadow,?", [1] = "#a nc +shadow,?", [2] = "#a de +shadow,?", [3] = "#a react +shadow,?"},
             strategy = "shadow",
-            tooltip = "Dps mode: shadow",
+            tooltip = "Shadow mode (dps)",
             index = 2
         },
-        ["shadow_aoe"] = {
-            icon = "shadow_aoe",
-            command = {[0] = "#a co ~shadow aoe,?"},
-            strategy = "shadow aoe",
-            tooltip = "Use shadow AOE abilities",
+		["aoe"] = {
+            icon = "caster_aoe",
+            command = {[0] = "#a co ~aoe,?", [1] = "#a nc ~aoe,?"},
+            strategy = "aoe",
+            tooltip = "Use AOE abilities",
             index = 3
         },
-        ["shadow_debuff"] = {
-            icon = "shadow_debuff",
-            command = {[0] = "#a co ~shadow debuff,?"},
-            strategy = "shadow debuff",
-            tooltip = "Use shadow debuffs",
+        ["bdps"] = {
+            icon = "boost",
+            command = {[0] = "#a co ~buff,?", [1] = "#a nc ~buff,?"},
+            strategy = "buff",
+            tooltip = "Use buff abilities (cooldowns, trinkets, buffs)",
             index = 4
+        },
+		["boost"] = {
+            icon = "boost",
+            command = {[0] = "#a co ~boost,?", [1] = "#a nc ~boost,?"},
+            strategy = "boost",
+            tooltip = "Use boost abilities (cooldowns, trinkets)",
+            index = 5
         },
         ["cure"] = {
             icon = "cure",
             command = {[0] = "#a co ~cure,?", [1] = "#a nc ~cure,?"},
             strategy = "cure",
-            tooltip = "Cure (poison, disease, etc.)",
-            index = 5
-        },
-        ["rshadow"] = {
-            icon = "rshadow",
-            icon_native = "spell_shadow_antishadow",
-            command = {[0] = "#a nc ~rshadow,?"},
-            strategy = "rshadow",
-            tooltip = "Provide shadow resistance",
+            tooltip = "Use cure abilities (curses)",
             index = 6
+        },
+		["offheal"] = {
+            icon = "heal",
+            command = {[0] = "#a co ~offheal,?", [1] = "#a nc ~offheal,?"},
+            strategy = "offheal",
+            tooltip = "Use healing abilities to heal other party members while being in dps mode",
+            index = 7
+        },
+		["offdps"] = {
+            icon = "dps",
+            command = {[0] = "#a co ~offdps,?", [1] = "#a nc ~offdps,?"},
+            strategy = "offdps",
+            tooltip = "Use dps abilities to attack enemies while being on healer mode",
+            index = 8
         },
 		["preheal"] = {
             icon = "heal",
             command = {[0] = "#a co ~preheal,?"},
             strategy = "preheal",
             tooltip = "Heal the party before receiving melee damage",
-            index = 7
+            index = 9
         }
     })
     CreateToolBar(frame, -y, "CLASS_ROGUE", {
@@ -1800,7 +1813,7 @@ function CreateSelectedBotPanel()
             icon = "heal",
             command = {[0] = "#a co ~offheal,?", [1] = "#a nc ~offheal,?"},
             strategy = "offheal",
-            tooltip = "Use healing abilities to heal other party members",
+            tooltip = "Use healing abilities to heal other party members while being in dps mode",
             index = 7
         },
 		["totems"] = {
